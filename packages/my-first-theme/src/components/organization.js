@@ -4,7 +4,7 @@ import structPic from '../assets/img/组织架构.png'
 import defaultPic from '../assets/img/默认.png'
 import * as common from './common'
 
-const organization = () => {
+const Organization = () => {
   const {Main, Title, UnderLine} = common.components;
   return(
     <Main>

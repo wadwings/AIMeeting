@@ -2,7 +2,7 @@ const settings = {
   "name": "frontity",
   "state": {
     "frontity": {
-      "url": "https://test.frontity.org",
+      "url": "http://wp.dedsec.site",
       "title": "Test Frontity Blog",
       "description": "WordPress installation for Frontity development"
     }
@@ -15,7 +15,7 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://test.frontity.org"
+          "url": "http://wp.dedsec.site"
         }
       }
     },
