@@ -105,4 +105,4 @@ const Grid = styled.div`
   margin: 2rem;
 `
 
-export default organization
+export default Organization

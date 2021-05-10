@@ -1,5 +1,12 @@
 import { connect, Global, css, styled } from "frontity"
 import React from "react"
+import Detail from './detail'
+import Guide from './guide'
+import Organization from './organization'
+import Review from './review'
+import Intro from './intro'
+import Routine from './routine'
+
 const Title = (props) => {
   const {word, png} = props
   return(
@@ -45,6 +52,16 @@ const components = {
   Main: Main
 }
 
+const pages = {
+  Detail: Detail,
+  Guide: Guide,
+  Organization: Organization,
+  Review: Review,
+  Intro: Intro,
+  Routine: Routine
+}
+
 export {
-  components
+  components,
+  pages
 }

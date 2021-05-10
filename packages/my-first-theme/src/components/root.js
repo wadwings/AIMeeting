@@ -1,24 +1,18 @@
 import { connect, Global, css, styled } from "frontity"
+import * as common from './common'
 import React from "react"
-import bgLayer1 from '../assets/img/bg_layer1.png'
-import bgLayer2 from '../assets/img/bg_layer2.png'
+import bgLayer1 from '../assets/img/bgLayer1.png'
+import bgLayer2 from '../assets/img/bgLayer2.png'
 import sponsorImg from '../assets/img/赞助logo.png'
 import titleImg from '../assets/img/标题.png'
 import themeImg from '../assets/img/主题.png'
 import positionImg from '../assets/img/时间地点.png'
-import organization from './organization'
-import Intro from './intro'
-import Rontine from './rontine'
-import Detail from './detail'
-import Guide from './guide'
-import Review from './review'
 class Root extends React.Component {
   constructor(props){
     super(props)
     this.state = {
       option: ['组织架构','日程安排','论坛详情','大会指引','云端直播','往届直播'],
       active: 0,
-      page: organization
     }
   }
 
@@ -29,7 +23,8 @@ class Root extends React.Component {
   }
 
   render(){
-    const {active, option, page: Page} = this.state
+    const {active, option} = this.state
+    const {Detail, Guide, Organization, Intro, Routine, Review} = common.pages
     const options = option.map((_, i) => i == active ? <ActiveOption onClick={this.optionClick.bind(this, i)} key={i}>{_}</ActiveOption> : <Option key={i} onClick={this.optionClick.bind(this, i)}>{_}</Option>)
     return(
       <>
@@ -55,9 +50,9 @@ class Root extends React.Component {
           <Theme src={themeImg}></Theme>
           <Title src={positionImg}></Title>
         </Main>
-        <Page/>
+        <Organization/>
         <Intro/>
-        <Rontine/>
+        <Routine/>
         <Detail/>
         <Guide/>
         <Review/>
