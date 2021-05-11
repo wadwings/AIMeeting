@@ -20,6 +20,7 @@ class Root extends React.Component {
       active: 0,
       page: organization
     }
+    console.log(frontity.state.source)
   }
 
   optionClick = (index) => {

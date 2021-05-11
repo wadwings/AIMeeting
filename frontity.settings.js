@@ -2,7 +2,7 @@ const settings = {
   "name": "frontity",
   "state": {
     "frontity": {
-      "url": "https://test.frontity.org",
+      "url": "https://tx.dedsec.site",
       "title": "Test Frontity Blog",
       "description": "WordPress installation for Frontity development"
     }
@@ -15,7 +15,18 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://test.frontity.org"
+          "url": "https://tx.dedsec.site",
+          "postTypes": [
+            {
+              type: "person",
+              endpoint: "person",
+            },            
+            {
+              type: "profile",
+              endpoint: "profile",
+              archive: "/profile"
+            }
+          ]
         }
       }
     },
