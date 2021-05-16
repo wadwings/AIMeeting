@@ -6,6 +6,11 @@ import Organization from './organization'
 import Review from './review'
 import Intro from './intro'
 import Routine from './routine'
+import Guest from './guest'
+import Sponsor from './sponsor'
+import Broadcast from './broadcast'
+import backgroundType1 from '../assets/img/backgroundType1.png'
+import backgroundType2 from '../assets/img/backgroundType2.png'
 
 const Title = (props) => {
   const {word, png} = props
@@ -22,18 +27,17 @@ const TitleImg = styled.img`
   padding: 0 0.8rem 0 0.2rem;
 `
 
-const TitleFrame = styled.div`
-  height: 2rem;
-  padding: 0.5rem;
-  background-color: #041b43;
-  border-radius: 1.5rem;
-  position: absolute;
-  font-size: 1.5rem;
-  color: white;
-  display:flex;
-  top: 1rem;
-  left: 1rem;
-`
+const TitleFrame = styled.div({
+  height: '2rem',
+  padding: '0.5rem',
+  position: 'relative',
+  fontSize: '1.5rem',
+  color: 'grey',
+  fontWeight: 500,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+})
 
 const UnderLine = styled.div`
   width: 80vw;
@@ -41,24 +45,87 @@ const UnderLine = styled.div`
   border: 0.04rem #041c45 solid;
 `
 
-const Main = styled.div`
-  position: relative;
-  width: 100%;
-  min-height: calc(100vw / 16);
-`
+const Main = styled.div({
+  position: 'relative',
+  display: 'flex',
+  flexFlow: 'column',
+  width: '100%',
+  height: 'calc(100vw / 16 * 9)',
+  overflow: 'hidden'
+})
+
+const BgImg = styled.img({
+  position: 'absolute',
+  top: '0',
+  width:'100%',
+  height: '100%',
+  opacity: 0.4,
+  zIndex: -1,
+})
+
+const MainBg1 = () => {
+  return <BgImg src={backgroundType1} />
+}
+
+const MainBg2 = () => {
+  return <BgImg src={backgroundType2} />
+}
+
+
+const PostUnconnect = (props) => {
+  const {url, state} = props
+  const data = state.source.get(url)
+  console.log(data)
+  const post = state.source[data.type][data.id]
+  return (
+    <PostFrame>
+      <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+    </PostFrame>
+  )
+}
+
+const PostFrame = styled.div({
+  backgroundColor: 'white',
+  height: '100%',
+  width:'100%',
+  overflowY: 'auto'
+})
+
+const ContentLayout = styled.div({
+  margin: "2rem 4rem",
+  flex: 1,
+});
+
+const Content = styled.div({
+  height: '100%',
+  padding: "2rem",
+  backgroundColor: "rgba(255,255,255, 0.6)",
+  overflowY: "auto",
+})
+
+const Post = connect(PostUnconnect)
+
 const components = {
-  Title: Title,
-  UnderLine: UnderLine,
-  Main: Main
+  Title,
+  UnderLine,
+  Main,
+  MainBg1,
+  MainBg2,
+  Post,
+  ContentLayout,
+  Content
 }
 
 const pages = {
-  Detail: Detail,
-  Guide: Guide,
-  Organization: Organization,
-  Review: Review,
-  Intro: Intro,
-  Routine: Routine
+  Detail,
+  Guide,
+  Organization,
+  Review,
+  Intro,
+  Routine,
+  Guest,
+  Sponsor,
+  Broadcast
 }
 
 export {

@@ -6,10 +6,12 @@ import defaultPic from '../assets/img/默认.png'
 import * as common from './common'
 
 const Review = () => {
-  const {Main, Title, UnderLine} = common.components;
+  const {Main, Title, MainBg2} = common.components;
   return(
     <Main>
+      <MainBg2/>
       <Title word='往届回顾' png={reviewPic}></Title>
+      <ReviewLayout>
       <Header>首届中国光谷人工智能大会暨企业家高峰论坛（2019）
       </Header>
       <Img src={groupPic}></Img>
@@ -19,10 +21,16 @@ const Review = () => {
         <MagicImg src={defaultPic} word='文字'></MagicImg>
         <MagicImg src={defaultPic} word='文字'></MagicImg>
       </Grid>
-      <UnderLine></UnderLine>
+      </ReviewLayout>
     </Main>
   )
 }
+
+const ReviewLayout = styled.div({
+  margin: '2rem',
+  maxHeight: 'calc(100% - 8rem)',
+  overflowY: 'auto'
+})
 
 class MagicImg extends React.Component {
   constructor(props){
@@ -79,20 +87,6 @@ const Text = styled.div`
   justify-content: center;
 `
 
-const ShowText = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  transition: 0.5s; 
-  position: absolute;
-  bottom: 0;
-  opacity: 1;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-`
-
 const MagicDiv = styled.div`
   position:relative;
   overflow:hidden;
@@ -101,12 +95,10 @@ const MagicDiv = styled.div`
 
 const Header = styled.div`
   position: relative;
-  margin: 0 auto;
-  width: 60vw;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 10rem 1.5rem 15rem;
+  justify-content: center;
+  padding: 1.5rem;
   font-size: 1.5rem;
 `
 

@@ -2,7 +2,7 @@ const settings = {
   "name": "aimeeting",
   "state": {
     "frontity": {
-      "url": "https://test.frontity.org",
+      "url": "https://tx.dedsec.site",
       "title": "Test Frontity Blog",
       "description": "WordPress installation for Frontity development"
     }
@@ -15,8 +15,26 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://test.frontity.org"
-        }
+          "url": "https://tx.dedsec.site"
+        },
+        'postTypes': [
+          {
+            type: "person",
+            endpoint: "person",
+            archive: "/persons",
+          },
+        ],
+        taxonomies: [
+          {
+            taxonomy: "conference",
+            endpoint: "conference",
+            postTypeEndpoint: "person",
+            params: {
+              per_page: 5,
+              _embed: true,
+            },
+          },
+        ]
       }
     },
     "@frontity/tiny-router",
