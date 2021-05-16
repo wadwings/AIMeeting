@@ -14,6 +14,7 @@ class Root extends React.Component {
       option: ['组织架构','日程安排','论坛详情','大会指引','云端直播','往届直播'],
       active: 0,
     }
+    console.log(frontity.state.source)
   }
 
   optionClick = (index) => {

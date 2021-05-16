@@ -1,10 +1,20 @@
 import { connect, Global, css, styled } from "frontity"
-import React from "react"
+import React, {useEffect} from "react"
 import structPic from '../assets/img/组织架构.png'
 import defaultPic from '../assets/img/默认.png'
 import * as common from './common'
 
+<<<<<<< HEAD
 const Organization = () => {
+=======
+const organization = ({ state, actions }) => {
+  useEffect(() => {
+    actions.source.fetch("/persons");
+  }, []);
+
+  const data = state.source.get("/persons");
+
+>>>>>>> wings_dev
   const {Main, Title, UnderLine} = common.components;
   return(
     <Main>

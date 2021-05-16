@@ -2,7 +2,11 @@ const settings = {
   "name": "frontity",
   "state": {
     "frontity": {
+<<<<<<< HEAD
       "url": "http://wp.dedsec.site",
+=======
+      "url": "https://tx.dedsec.site",
+>>>>>>> wings_dev
       "title": "Test Frontity Blog",
       "description": "WordPress installation for Frontity development"
     }
@@ -15,7 +19,22 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
+<<<<<<< HEAD
           "url": "http://wp.dedsec.site"
+=======
+          "url": "https://tx.dedsec.site",
+          "postTypes": [
+            {
+              type: "person",
+              endpoint: "person",
+            },            
+            {
+              type: "profile",
+              endpoint: "profile",
+              archive: "/profile"
+            }
+          ]
+>>>>>>> wings_dev
         }
       }
     },
