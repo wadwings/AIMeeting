@@ -15,26 +15,26 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://tx.dedsec.site"
-        },
-        'postTypes': [
-          {
-            type: "person",
-            endpoint: "person",
-            archive: "/persons",
-          },
-        ],
-        taxonomies: [
-          {
-            taxonomy: "conference",
-            endpoint: "conference",
-            postTypeEndpoint: "person",
-            params: {
-              per_page: 5,
-              _embed: true,
+          "url": "https://tx.dedsec.site",
+          'postTypes': [
+            {
+              type: "person",
+              endpoint: "person",
+              archive: "/person",
             },
-          },
-        ]
+          ],
+          taxonomies: [
+            {
+              taxonomy: "conference",
+              endpoint: "conference",
+              postTypeEndpoint: "person",
+              params: {
+                per_page: 5,
+                _embed: true,
+              },
+            },
+          ]
+        },
       }
     },
     "@frontity/tiny-router",

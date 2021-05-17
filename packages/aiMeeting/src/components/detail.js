@@ -1,32 +1,71 @@
 import { connect, Global, css, styled } from "frontity";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import detailPic from "../assets/img/论坛详情.png";
 import defaultPic from "../assets/img/默认.png";
 import * as common from "./common";
 
-const Detail = () => {
+const Detail = ({ state, actions }) => {
   const [isDetail, setIsDetail] = useState(false);
+  const [active, setActive] = useState(0);
+  const [displays, setDisplays] = useState([]);
   const optionText = [
-    "论坛主会场",
-    "第一分会场",
-    "第二分会场",
-    "第三分会场",
-    "第四分会场",
-    "第五分会场",
+    {
+      name: "论坛主会场",
+      url: "/conference/main",
+    },
+    {
+      name: "第一分会场",
+      url: "/conference/no1",
+    },
+    {
+      name: "第二分会场",
+      url: "/conference/no2",
+    },
+    {
+      name: "第三分会场",
+      url: "/conference/no3",
+    },
+    {
+      name: "第四分会场",
+      url: "/conference/no4",
+    },
+    {
+      name: "第五分会场",
+      url: "/conference/no5",
+    },
   ];
+  //fetch data
+  useEffect(() => {
+    actions.source.fetch("/person");
+    actions.source.fetch("/conference");
+    optionText.map(({ url }, i) => {
+      i === active
+        ? actions.source.fetch(url).then(() =>
+            setDisplays(
+              state.source
+                .get(url)
+                .items.map(({ type, id }) => state.source[type][id])
+                .map(({ test: name, position, photo }) => (
+                  <Display
+                    key={name}
+                    name={name}
+                    position={position}
+                    pic={photo.guid}
+                    click={() => setIsDetail(!isDetail)}
+                  ></Display>
+                ))
+            )
+          )
+        : actions.source.fetch(url);
+    });
+  });
   const { Main, Title, MainBg2 } = common.components;
-  const options = optionText.map((_) => <option key={_} value={_}>{_}</option>);
-  const displays = Array(4)
-    .fill(null)
-    .map((_, i) => (
-      <Display
-        key={i}
-        pic={defaultPic}
-        name="XXX"
-        position="XXXX职称"
-        click={() => setIsDetail(this, !isDetail)}
-      ></Display>
-    ));
+  const options = optionText.map(({ name }, i) => (
+    <option key={name} value={name}>
+      {name}
+    </option>
+  ));
+
   return (
     <Main>
       <MainBg2 />
@@ -67,6 +106,7 @@ const Content = (props) => {
     </ContentFrame>
   );
 };
+
 const ContentFrame = styled.div`
   padding: 3rem;
 `;
@@ -126,4 +166,4 @@ const Grid = styled.div`
   margin: 3rem;
 `;
 
-export default Detail;
+export default connect(Detail);

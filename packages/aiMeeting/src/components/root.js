@@ -14,11 +14,6 @@ const Root = ({ state, actions }) => {
   const {Detail, Guide, Organization, Intro, Routine, Review, Guest, Sponsor, Broadcast} = common.pages
   const options = option.map((_, i) => i == active ? <ActiveOption onClick={() => setActive(i)} key={i}>{_}</ActiveOption> : <Option key={i} onClick={() => setActive(i)}>{_}</Option>)
 
-  useEffect(() => {
-    actions.source.fetch('/conference/3')
-    actions.source.fetch('/person')
-  })
-
   return(
     <>
       <Global
