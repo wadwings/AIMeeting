@@ -45,7 +45,7 @@ const Detail = ({ state, actions }) => {
               state.source
                 .get(url)
                 .items.map(({ type, id }) => state.source[type][id])
-                .map(({ test: name, position, photo }) => (
+                .map(({ name, position, photo }) => (
                   <Display
                     key={name}
                     name={name}
