@@ -75,7 +75,6 @@ const MainBg2 = () => {
 const PostUnconnect = (props) => {
   const {url, state} = props
   const data = state.source.get(url)
-  console.log(data)
   const post = state.source[data.type][data.id]
   return (
     <PostFrame>
