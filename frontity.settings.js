@@ -22,11 +22,25 @@ const settings = {
               endpoint: "person",
               archive: "/person",
             },
+            {
+              type: "review",
+              endpoint: "review",
+              archive: "/review",
+            }
           ],
           taxonomies: [
             {
               taxonomy: "conference",
               endpoint: "conference",
+              postTypeEndpoint: "person",
+              params: {
+                per_page: 5,
+                _embed: true,
+              },
+            },
+            {
+              taxonomy: "organization",
+              endpoint: "organization",
               postTypeEndpoint: "person",
               params: {
                 per_page: 5,

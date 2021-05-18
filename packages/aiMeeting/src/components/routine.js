@@ -32,7 +32,7 @@ const Rontine = () => {
     )
   );
   return (
-    <Main>
+    <Main  id='item2'>
       <MainBg2 />
       <Title word="日程安排" png={rontinePic}></Title>
       <Menu>{options}</Menu>

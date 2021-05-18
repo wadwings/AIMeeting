@@ -29,7 +29,7 @@ const Guide = () => {
     )
   );
   return (
-    <Main>
+    <Main id='item4'>
       <MainBg2 />
       <Title word="大会指引" png={guidePic}></Title>
       <Menu>{options}</Menu>

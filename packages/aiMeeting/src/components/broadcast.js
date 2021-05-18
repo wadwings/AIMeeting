@@ -20,7 +20,7 @@ const Broadcast = ({}) => {
     )
   );
   return (
-    <Main>
+    <Main id='item5'>
       <MainBg2 />
       <Title word="云端直播" png={yunPic}></Title>
       <Menu>{options}</Menu>

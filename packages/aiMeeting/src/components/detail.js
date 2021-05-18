@@ -5,9 +5,9 @@ import defaultPic from "../assets/img/默认.png";
 import * as common from "./common";
 
 const Detail = ({ state, actions }) => {
-  const [isDetail, setIsDetail] = useState(false);
   const [active, setActive] = useState(0);
   const [displays, setDisplays] = useState([]);
+  const [DetailContent, setDetailContent] = useState(null);
   const optionText = [
     {
       name: "论坛主会场",
@@ -35,31 +35,65 @@ const Detail = ({ state, actions }) => {
     },
   ];
   //fetch data
+  const activeUrl = optionText[active].url;
   useEffect(() => {
     actions.source.fetch("/person");
     actions.source.fetch("/conference");
-    optionText.map(({ url }, i) => {
-      i === active
-        ? actions.source.fetch(url).then(() =>
-            setDisplays(
-              state.source
-                .get(url)
-                .items.map(({ type, id }) => state.source[type][id])
-                .map(({ name, position, photo }) => (
-                  <Display
-                    key={name}
-                    name={name}
-                    position={position}
-                    pic={photo.guid}
-                    click={() => setIsDetail(!isDetail)}
-                  ></Display>
-                ))
-            )
-          )
-        : actions.source.fetch(url);
-    });
-  });
-  const { Main, Title, MainBg2 } = common.components;
+  }, []);
+  useEffect(async () => {
+    await actions.source.fetch(activeUrl);
+    setDisplays(
+      state.source
+        .get(activeUrl)
+        .items.map(({ type, id }) => state.source[type][id])
+        .map((data) => {
+          const {
+            person_name: name,
+            position,
+            photo,
+            subject,
+            subjectintro,
+            personintro,
+          } = data;
+          const content = {
+            subject,
+            subjectintro,
+            personintro,
+          };
+          return (
+            <Display
+              key={name}
+              name={name}
+              position={position}
+              pic={photo.guid}
+              click={() => setUpDetail(photo.guid, name, position, content)}
+            ></Display>
+          );
+        })
+    );
+  }, [active]);
+  function updateActive(e) {
+    const value = e.target.value;
+    for (let i = optionText.length - 1; i--; i >= 0) {
+      if (optionText[i].name === value) {
+        console.log("set active to: ", i);
+        setActive(i);
+        return;
+      }
+    }
+  }
+  function setUpDetail(pic, name, position, content) {
+    setDetailContent(
+      <DisplayContent
+        pic={pic}
+        name={name}
+        position={position}
+        content={content}
+        click={setDetailContent}
+      ></DisplayContent>
+    );
+  }
+  const { Main, Title, MainBg2, Content, ContentLayout } = common.components;
   const options = optionText.map(({ name }, i) => (
     <option key={name} value={name}>
       {name}
@@ -67,49 +101,60 @@ const Detail = ({ state, actions }) => {
   ));
 
   return (
-    <Main>
+    <Main id='item3'>
       <MainBg2 />
       <Title word="论坛详情" png={detailPic}></Title>
       <Center>
-        <Select>{options}</Select>
+        <Select onChange={updateActive}>{options}</Select>
       </Center>
-      <Grid>
-        {isDetail ? (
-          <Content
-            pic={defaultPic}
-            name="XXX"
-            position="XXX"
-            content={{
-              title: "XXXXXXX",
-              report: "XXXXXXXXXXXXXXXXXXX",
-              person: "XXXXXXXXXXXXXXXXXXX",
-            }}
-          ></Content>
-        ) : (
-          displays
-        )}
-      </Grid>
+      {DetailContent ? (
+        <ContentLayout>
+          <Content>{DetailContent}</Content>
+        </ContentLayout>
+      ) : (
+        <Grid>{displays}</Grid>
+      )}
     </Main>
   );
 };
 
-const Content = (props) => {
-  const { pic, name, position, content } = props;
+const Exit = styled.div({
+  borderRadius: '3rem',
+  padding: '0.2rem',
+  border: '1px #8adbff solid',
+  position: 'absolute',
+  bottom: '0',
+  right: '1rem',
+  textAligh: 'center',
+  width: '4rem',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  cursor: 'pointer',
+})
+
+const DisplayContent = (props) => {
+  const { pic, name, position, content, click } = props;
   return (
-    <ContentFrame>
+    <>
       <ContentImg src={pic}></ContentImg>
+      <Exit onClick={() => click(null)}>返回</Exit>
       <H3>{name}</H3>
       <P>{position}</P>
-      <p>报告主题：{content.title}</p>
-      <p>报告简介：{content.report}</p>
-      <p>个人简介：{content.report}</p>
-    </ContentFrame>
+      <ContentBlock>报告主题：<Text>{content.subject}</Text></ContentBlock>
+      <ContentBlock>报告简介：<Text>{content.subjectintro}</Text></ContentBlock>
+      <ContentBlock>个人简介：<Text>{content.personintro}</Text></ContentBlock>
+    </>
   );
 };
 
-const ContentFrame = styled.div`
-  padding: 3rem;
-`;
+const ContentBlock = styled.div({
+  margin: '0.5rem'
+})
+
+const Text = styled.p({
+  wordBreak: 'break-word'
+})
 
 const ContentImg = styled.img`
   height: 10rem;
@@ -130,7 +175,7 @@ const P = styled.p`
 const Display = (props) => {
   const { pic, name, position, click } = props;
   return (
-    <div onClick={click}>
+    <div css={css`cursor: pointer`}onClick={click}>
       <DisplayImg src={pic}></DisplayImg>
       <h3>{name}</h3>
       <p>{position}</p>
@@ -152,11 +197,7 @@ const Select = styled.select`
   display: flex;
   justify-content: center;
   text-align: center;
-  width: 7rem;
-  margin: 1rem auto;
-  margin-top: 2rem;
   font-size: 1rem;
-  height: 2rem;
 `;
 
 const Grid = styled.div`

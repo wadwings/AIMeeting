@@ -1,65 +1,74 @@
-import { connect, Global, css, styled } from "frontity"
-import React from "react"
-import guestPic from '../assets/img/主要嘉宾.png'
-import defaultPic from '../assets/img/默认.png'
-import * as common from './common'
+import { connect, Global, css, styled } from "frontity";
+import React, { useEffect, useState } from "react";
+import guestPic from "../assets/img/主要嘉宾.png";
+import defaultPic from "../assets/img/默认.png";
+import * as common from "./common";
 
-const Guest = () => {
-  const {Main, Title, UnderLine, MainBg1} = common.components;
-  return(
+const Guest = ({ state, actions }) => {
+  const { Main, Title, MainBg1, Content, ContentLayout } = common.components;
+  const [guest, setGuest] = useState([]);
+  useEffect(async () => {
+    await actions.source.fetch("/organization/guest");
+    setGuest(
+      state.source
+        .get("/organization/guest").items
+        .map(({ type, id }) => state.source[type][id])
+        .map(({photo, person_name: name, position}) => <GuestSingle key={name} src={photo.guid} name={name} position={position}></GuestSingle>)
+    );
+  }, []);
+  return (
     <Main>
-      <MainBg1/>
-      <Title word='主要嘉宾' png={guestPic}></Title>
-      <GuestLayout>
-        <GuestSingle src={defaultPic} name='XXX' position='XXXXXX职位'/>
-        <GuestSingle src={defaultPic} name='XXX' position='XXXXXX职位'/>
-        <GuestSingle src={defaultPic} name='XXX' position='XXXXXX职位'/>
-      </GuestLayout>
+      <MainBg1 />
+      <Title word="主要嘉宾" png={guestPic}></Title>
+      <ContentLayout>
+        <Content>
+          <GuestLayout>
+            {guest}
+          </GuestLayout>
+        </Content>
+      </ContentLayout>
     </Main>
-  )
-}
+  );
+};
 
 const GuestSingle = (props) => {
-  const {src, name, position} = props
-  return(
+  const { src, name, position } = props;
+  return (
     <GuestFrame>
-      <GuestPic src={src}/>
+      <GuestPic src={src} />
       <GuestName>{name}</GuestName>
       <GuestPosition>{position}</GuestPosition>
     </GuestFrame>
-  )
-}
+  );
+};
 
 const GuestLayout = styled.div({
-  position: 'relative',
-  margin: '5rem',
-  height: 'calc(100% - 14rem)',
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr 1fr',
-  gridTemplateRows: '100%',
-  overflowY: 'auto',
-  gridGap: '2rem'
-})
+  position: "relative",
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr 1fr",
+  gridTemplateRows: "calc(100vw / 16 * 9 - 10rem)",
+  gridGap: "2rem",
+});
 
 const GuestFrame = styled.div({
-  display: 'flex',
-  flexFlow: 'column',
-  maxHeight: '100%'
-})
+  display: "flex",
+  flexFlow: "column",
+  maxHeight: "100%",
+});
 
 const GuestPic = styled.img({
-  height: '70%',
-  maxWidth: '100%'
-})
+  height: "70%",
+  maxWidth: "100%",
+});
 
 const GuestName = styled.div({
-  paddingLeft: '1rem',
-  fontSize: '1.5rem'
-})
+  paddingLeft: "1rem",
+  fontSize: "1.5rem",
+});
 
 const GuestPosition = styled.div({
-  paddingLeft: '1rem',
-  fontSize: '1rem'
-})
+  paddingLeft: "1rem",
+  fontSize: "1rem",
+});
 
-export default Guest
+export default connect(Guest);

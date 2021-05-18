@@ -1,23 +1,83 @@
 import { connect, Global, css, styled } from "frontity";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import structPic from "../assets/img/组织架构.png";
 import defaultPic from "../assets/img/默认.png";
 import * as common from "./common";
 
-const Organization = () => {
-  const { Main, Title, MainBg2} = common.components;
+const Organization = ({ state, actions }) => {
+  const { Main, Title, MainBg2 } = common.components;
+  const [presidents, setPresidents] = useState([]);
+  const [committee, setCommittee] = useState([]);
+  const [executive, setExecutive] = useState([]);
+  const [promotion, setPromotion] = useState([]);
+  const [secretary, setSecretary] = useState([]);
+  useEffect(async () => {
+    await actions.source.fetch("/orgaization");
+    await actions.source.fetch("/organization/president");
+    await actions.source.fetch("/organization/committee");
+    await actions.source.fetch("/organization/executive");
+    await actions.source.fetch("/organization/promotion");
+    await actions.source.fetch("/organization/secretary");
+    setPresidents(
+      state.source
+        .get("/organization/president")
+        .items.map(({ type, id }) => state.source[type][id])
+        .map(({ photo, person_name: name, achievement }) => (
+          <Display
+            key={name}
+            name={name}
+            achievement={achievement}
+            pic={photo.guid}
+          ></Display>
+        ))
+    );
+    setCommittee(
+      state.source
+        .get("/organization/committee")
+        .items.map(({ type, id }) => state.source[type][id])
+        .map(
+          ({ person_name: name, position, school }) =>
+            `${name}（${position}，${school}）`
+        )
+    );
+    setExecutive(
+      state.source
+        .get("/organization/executive")
+        .items.map(({ type, id }) => state.source[type][id])
+        .map(
+          ({ person_name: name, position, school }) =>
+            `${name}（${position}，${school}）`
+        )
+    );
+    setPromotion(
+      state.source
+        .get("/organization/promotion")
+        .items.map(({ type, id }) => state.source[type][id])
+        .map(
+          ({ person_name: name}) =>
+            `${name}`
+        )
+    );
+    setSecretary(
+      state.source
+        .get("/organization/secretary")
+        .items.map(({ type, id }) => state.source[type][id])
+        .map(
+          ({ person_name: name}) =>
+            `${name}`
+        )
+    );
+  }, []);
   return (
-    <Main>
+    <Main id='item1'>
       <MainBg2 />
       <Title word="组织架构" png={structPic}></Title>
       <OrganizationLayout>
-        <Grid>
-          <Display></Display>
-          <Display></Display>
-        </Grid>
-        <Deputy title='执行主席' content={['曾志刚', '更原名']}></Deputy>
-        <Deputy title='执行主席' content={['曾志刚', '更原名']}></Deputy>
-        <Deputy title='执行主席' content={['曾志刚', '更原名']}></Deputy>
+        <Grid>{presidents}</Grid>
+        <Deputy title="执行主席" content={committee}></Deputy>
+        <Deputy title="程序委员会主席" content={executive}></Deputy>
+        <Deputy title="推广主席" content={promotion}></Deputy>
+        <Deputy title="大会秘书组" content={secretary}></Deputy>
       </OrganizationLayout>
     </Main>
   );
@@ -30,9 +90,9 @@ const OrganizationLayout = styled.div({
 });
 
 const Deputy = (props) => {
-  const {title, content} = props
-
-  const Deputys = content.map(_ => <DeputySingle key={_}>{_}</DeputySingle>)
+  const { title, content } = props;
+  const showLines = title === '执行主席' || title === '程序委员会主席'
+  const Deputys = showLines ? content.map((_) => <DeputySingle key={_}>{_}</DeputySingle>) : <DeputySingle>{content.join('，')}</DeputySingle>;
   return (
     <DeputyFrame>
       <DeputyTitle>{title}</DeputyTitle>
@@ -42,27 +102,28 @@ const Deputy = (props) => {
 };
 
 const DeputyFrame = styled.div({
-  maring: '1rem'
-})
+  maring: "1rem",
+});
 
 const DeputyTitle = styled.div({
-  margin: '0.5rem',
+  margin: "0.5rem",
   marginLeft: "15%",
 });
 
 const DeputySingle = styled.div({
-  margin: '0.25rem',
+  margin: "0.25rem",
   marginLeft: "30%",
 });
 
-const Display = () => {
+const Display = (props) => {
+  const { name, achievement, pic } = props;
   return (
     <DisplayFrame>
-      <DisplayPic src={defaultPic}></DisplayPic>
+      <DisplayPic src={pic}></DisplayPic>
       <DisplayText>
-        <h3>主席：XXX</h3>
+        <h3>主席：{name}</h3>
         <p>重要荣誉：</p>
-        <p>荣誉荣誉荣誉荣誉荣誉荣誉荣誉荣誉荣誉荣誉荣誉</p>
+        <p>{achievement}</p>
       </DisplayText>
     </DisplayFrame>
   );
@@ -89,4 +150,4 @@ const Grid = styled.div`
   grid-gap: 2rem;
 `;
 
-export default Organization;
+export default connect(Organization);

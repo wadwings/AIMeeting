@@ -93,13 +93,15 @@ const PostFrame = styled.div({
 const ContentLayout = styled.div({
   margin: "2rem 4rem",
   flex: 1,
+  overflowY: "auto",
 });
 
 const Content = styled.div({
-  height: '100%',
+  minHeight: 'calc(100% - 4rem)',
   padding: "2rem",
+  position: 'relative',
   backgroundColor: "rgba(255,255,255, 0.6)",
-  overflowY: "auto",
+
 })
 
 const Post = connect(PostUnconnect)
