@@ -1,7 +1,7 @@
 import { connect, Global, css, styled } from "frontity";
 import React, { useEffect, useState } from "react";
-import structPic from "../assets/img/组织架构.png";
-import defaultPic from "../assets/img/默认.png";
+import structPic from "../../assets/img/组织架构.png";
+import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
 const Organization = ({ state, actions }) => {

@@ -1,16 +1,17 @@
-import Root from "./components/root"
+import Root from "./components";
 
-const myFirstTheme = {
+const myFirstTheme =
+{
   name: "my-first-theme",
-  roots: {
-    theme: Root,
-  },
+    roots: {
+  theme: Root,
+},
   state: {
     theme: {},
   },
   actions: {
     theme: {},
-  },
+  }
 }
 
 export default myFirstTheme

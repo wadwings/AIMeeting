@@ -1,12 +1,12 @@
 import { connect, Global, css, styled } from "frontity";
 import * as common from "./common";
 import React, { useState, useEffect } from "react";
-import bgLayer1 from "../assets/img/bgLayer1.png";
-import bgLayer2 from "../assets/img/bgLayer2.png";
-import logo from "../assets/img/logo.png";
-import titleImg from "../assets/img/标题.png";
-import themeImg from "../assets/img/主题.png";
-import positionImg from "../assets/img/时间地点.png";
+import bgLayer1 from "../../assets/img/bgLayer1.png";
+import bgLayer2 from "../../assets/img/bgLayer2.png";
+import logo from "../../assets/img/logo.png";
+import titleImg from "../../assets/img/标题.png";
+import themeImg from "../../assets/img/主题.png";
+import positionImg from "../../assets/img/时间地点.png";
 
 const Root = ({ state, actions }) => {
   const option = [
@@ -42,7 +42,7 @@ const Root = ({ state, actions }) => {
   );
 
   return (
-    <>
+    <div id='PC'>
       <Global
         styles={css`
           @media screen and (min-width: 500px) {
@@ -101,7 +101,7 @@ const Root = ({ state, actions }) => {
       <Guide />
       <Broadcast />
       <Review />
-    </>
+    </div>
   );
 };
 

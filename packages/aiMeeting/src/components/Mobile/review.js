@@ -1,8 +1,8 @@
 import { connect, Global, css, styled } from "frontity";
 import React, { useState, useEffect } from "react";
-import reviewPic from "../assets/img/往届回顾.png";
-import groupPic from "../assets/img/2019人工智能大会合影.png";
-import defaultPic from "../assets/img/默认.png";
+import reviewPic from "../../assets/img/往届回顾.png";
+import groupPic from "../../assets/img/2019人工智能大会合影.png";
+import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
 const Review = ({ state, actions }) => {

@@ -9,8 +9,8 @@ import Routine from './routine'
 import Guest from './guest'
 import Sponsor from './sponsor'
 import Broadcast from './broadcast'
-import backgroundType1 from '../assets/img/backgroundType1.png'
-import backgroundType2 from '../assets/img/backgroundType2.png'
+import backgroundType1 from '../../assets/img/backgroundType1.png'
+import backgroundType2 from '../../assets/img/backgroundType2.png'
 
 const Title = (props) => {
   const {word, png} = props
@@ -32,11 +32,14 @@ const TitleFrame = styled.div({
   padding: '0.5rem',
   position: 'relative',
   fontSize: '1.5rem',
-  color: 'grey',
+  color: 'black',
   fontWeight: 500,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  margin: '0.5rem auto',
+  border: '2px solid #041c45',
+  borderRadius: '3rem',
 })
 
 const UnderLine = styled.div`

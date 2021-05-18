@@ -1,7 +1,7 @@
 import { connect, Global, css, styled } from "frontity";
 import React, { useEffect, useState } from "react";
-import guestPic from "../assets/img/主要嘉宾.png";
-import defaultPic from "../assets/img/默认.png";
+import guestPic from "../../assets/img/主要嘉宾.png";
+import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
 const Guest = ({ state, actions }) => {

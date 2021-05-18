@@ -1,7 +1,7 @@
 import { connect, Global, css, styled } from "frontity";
 import React, { useState, useEffect } from "react";
-import detailPic from "../assets/img/论坛详情.png";
-import defaultPic from "../assets/img/默认.png";
+import detailPic from "../../assets/img/论坛详情.png";
+import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
 const Detail = ({ state, actions }) => {

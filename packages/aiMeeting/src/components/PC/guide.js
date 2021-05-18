@@ -1,40 +1,37 @@
 import { connect, Global, css, styled } from "frontity";
 import React, { useState } from "react";
-import rontinePic from "../assets/img/日程安排.png";
+import guidePic from "../../assets/img/大会指引.png";
+import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
-const Rontine = () => {
+const Guide = () => {
   const { Main, Title, MainBg2, Post, Content, ContentLayout } = common.components;
   const [active, setActive] = useState(0);
   const data = [
     {
-      title: "7月23日",
-      url: "/dayone",
+      title: "投稿通知",
+      url: "/contributornotification",
     },
     {
-      title: "7月24日",
-      url: "/daytwo",
+      title: "会议注册",
+      url: "/conferenceregistration",
     },
     {
-      title: "7月25日",
-      url: "/daythree",
+      title: "住宿交通",
+      url: "/accommodation",
     },
   ];
   const options = data.map((_, i) =>
     i === active ? (
-      <ActiveOption onClick={() => setActive(i)} key={_.title}>
-        {_.title}
-      </ActiveOption>
+      <ActiveOption onClick={() => setActive(i)} key={_.title}>{_.title}</ActiveOption>
     ) : (
-      <Option onClick={() => setActive(i)} key={_.title}>
-        {_.title}
-      </Option>
+      <Option onClick={() => setActive(i)} key={_.title}>{_.title}</Option>
     )
   );
   return (
-    <Main  id='item2'>
+    <Main id='item4'>
       <MainBg2 />
-      <Title word="日程安排" png={rontinePic}></Title>
+      <Title word="大会指引" png={guidePic}></Title>
       <Menu>{options}</Menu>
       <ContentLayout>
         <Content>
@@ -56,6 +53,7 @@ const Menu = styled.div({
 });
 
 const Option = styled.div({
+  color: 'grey',
   textAlign: "center",
   width: "8rem",
   fontSize: "1.2rem",
@@ -65,11 +63,10 @@ const Option = styled.div({
 const ActiveOption = styled.div({
   textAlign: "center",
   width: "8rem",
-  color: "#8adbff",
+  color: "#042252",
   fontSize: "1.6rem",
-  padding: "0.2rem 0.4rem",
   cursor: "pointer",
-  borderBottom: "1px #8adbff solid",
+  borderBottom: "2px #042252 solid",
 });
 
-export default Rontine;
+export default Guide;

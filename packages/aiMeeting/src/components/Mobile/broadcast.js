@@ -1,6 +1,6 @@
 import { connect, Global, css, styled } from "frontity";
 import React, { useState } from "react";
-import yunPic from "../assets/img/云端直播.png";
+import yunPic from "../../assets/img/云端直播.png";
 import * as common from "./common";
 
 const Broadcast = ({}) => {
@@ -104,31 +104,30 @@ const BroadcastLayout = styled.div({
 });
 
 const Menu = styled.div({
-  position: 'relative',
-  margin: '0 auto',
-  width: '60vw',
-  height: '2rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-})
-
+  position: "relative",
+  margin: "0 auto",
+  width: "60vw",
+  height: "2rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+});
 
 const Option = styled.div({
-  textAlign: 'center',
-  width: '8rem',
-  fontSize: '1.2rem',
-  cursor: 'pointer'
+  color: 'grey',
+  textAlign: "center",
+  width: "8rem",
+  fontSize: "1.2rem",
+  cursor: "pointer",
 });
 
 const ActiveOption = styled.div({
-  textAlign: 'center',
-  width: '8rem',
-  color: '#8adbff',
-  fontSize: '1.6rem',
-  padding: '0.2rem 0.4rem',
-  cursor: 'pointer',
-  borderBottom: '1px #8adbff solid',
-})
+  textAlign: "center",
+  width: "8rem",
+  color: "#042252",
+  fontSize: "1.6rem",
+  cursor: "pointer",
+  borderBottom: "2px #042252 solid",
+});
 
 export default Broadcast;
