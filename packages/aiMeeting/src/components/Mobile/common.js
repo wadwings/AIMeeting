@@ -11,6 +11,7 @@ import Sponsor from './sponsor'
 import Broadcast from './broadcast'
 import backgroundType1 from '../../assets/img/backgroundType1.png'
 import backgroundType2 from '../../assets/img/backgroundType2.png'
+import {fetch} from '../PC/common'
 
 const Title = (props) => {
   const {word, png} = props
@@ -134,5 +135,6 @@ const pages = {
 
 export {
   components,
-  pages
+  pages,
+  fetch
 }

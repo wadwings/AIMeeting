@@ -6,14 +6,22 @@ import * as common from "./common";
 
 const Guest = ({ state, actions }) => {
   const { Main, Title, MainBg1, Content, ContentLayout } = common.components;
+  const { fetch } = common;
   const [guest, setGuest] = useState([]);
   useEffect(async () => {
-    await actions.source.fetch("/organization/guest");
+    await fetch( "/organization/guest");
     setGuest(
       state.source
-        .get("/organization/guest").items
-        .map(({ type, id }) => state.source[type][id])
-        .map(({photo, person_name: name, position}) => <GuestSingle key={name} src={photo.guid} name={name} position={position}></GuestSingle>)
+        .get("/organization/guest")
+        .items.map(({ type, id }) => state.source[type][id])
+        .map(({ photo, person_name: name, position }) => (
+          <GuestSingle
+            key={name}
+            src={photo.guid}
+            name={name}
+            position={position}
+          ></GuestSingle>
+        ))
     );
   }, []);
   return (
@@ -22,9 +30,7 @@ const Guest = ({ state, actions }) => {
       <Title word="主要嘉宾" png={guestPic}></Title>
       <ContentLayout>
         <Content>
-          <GuestLayout>
-            {guest}
-          </GuestLayout>
+          <GuestLayout>{guest}</GuestLayout>
         </Content>
       </ContentLayout>
     </Main>

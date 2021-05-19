@@ -6,70 +6,65 @@ import * as common from "./common";
 
 const Organization = ({ state, actions }) => {
   const { Main, Title, MainBg2 } = common.components;
+  const { fetch } = common;
   const [presidents, setPresidents] = useState([]);
   const [committee, setCommittee] = useState([]);
   const [executive, setExecutive] = useState([]);
   const [promotion, setPromotion] = useState([]);
   const [secretary, setSecretary] = useState([]);
   useEffect(async () => {
-    await actions.source.fetch("/orgaization");
-    await actions.source.fetch("/organization/president");
-    await actions.source.fetch("/organization/committee");
-    await actions.source.fetch("/organization/executive");
-    await actions.source.fetch("/organization/promotion");
-    await actions.source.fetch("/organization/secretary");
-    setPresidents(
-      state.source
-        .get("/organization/president")
-        .items.map(({ type, id }) => state.source[type][id])
-        .map(({ photo, person_name: name, achievement }) => (
-          <Display
-            key={name}
-            name={name}
-            achievement={achievement}
-            pic={photo.guid}
-          ></Display>
-        ))
-    );
-    setCommittee(
-      state.source
-        .get("/organization/committee")
-        .items.map(({ type, id }) => state.source[type][id])
-        .map(
-          ({ person_name: name, position, school }) =>
-            `${name}（${position}，${school}）`
-        )
-    );
-    setExecutive(
-      state.source
-        .get("/organization/executive")
-        .items.map(({ type, id }) => state.source[type][id])
-        .map(
-          ({ person_name: name, position, school }) =>
-            `${name}（${position}，${school}）`
-        )
-    );
-    setPromotion(
-      state.source
-        .get("/organization/promotion")
-        .items.map(({ type, id }) => state.source[type][id])
-        .map(
-          ({ person_name: name}) =>
-            `${name}`
-        )
-    );
-    setSecretary(
-      state.source
-        .get("/organization/secretary")
-        .items.map(({ type, id }) => state.source[type][id])
-        .map(
-          ({ person_name: name}) =>
-            `${name}`
-        )
-    );
-  }, []);
+      await fetch( "/orgaization");
+      await fetch( "/organization/president");
+      await fetch( "/organization/committee");
+      await fetch( "/organization/executive");
+      await fetch( "/organization/promotion");
+      await fetch( "/organization/secretary");
+      setPresidents(
+        state.source
+          .get("/organization/president")
+          .items.map(({ type, id }) => state.source[type][id])
+          .map(({ photo, person_name: name, achievement }) => (
+            <Display
+              key={name}
+              name={name}
+              achievement={achievement}
+              pic={photo.guid}
+            ></Display>
+          ))
+      );
+      setCommittee(
+        state.source
+          .get("/organization/committee")
+          .items.map(({ type, id }) => state.source[type][id])
+          .map(
+            ({ person_name: name, position, school }) =>
+              `${name}（${position}，${school}）`
+          )
+      );
+      setExecutive(
+        state.source
+          .get("/organization/executive")
+          .items.map(({ type, id }) => state.source[type][id])
+          .map(
+            ({ person_name: name, position, school }) =>
+              `${name}（${position}，${school}）`
+          )
+      );
+      setPromotion(
+        state.source
+          .get("/organization/promotion")
+          .items.map(({ type, id }) => state.source[type][id])
+          .map(({ person_name: name }) => `${name}`)
+      );
+      setSecretary(
+        state.source
+          .get("/organization/secretary")
+          .items.map(({ type, id }) => state.source[type][id])
+          .map(({ person_name: name }) => `${name}`)
+      );
+    }, []);
   return (
-    <Main id='item1'>
+    <Main id="item1">
       <MainBg2 />
       <Title word="组织架构" png={structPic}></Title>
       <OrganizationLayout>
@@ -91,8 +86,12 @@ const OrganizationLayout = styled.div({
 
 const Deputy = (props) => {
   const { title, content } = props;
-  const showLines = title === '执行主席' || title === '程序委员会主席'
-  const Deputys = showLines ? content.map((_) => <DeputySingle key={_}>{_}</DeputySingle>) : <DeputySingle>{content.join('，')}</DeputySingle>;
+  const showLines = title === "执行主席" || title === "程序委员会主席";
+  const Deputys = showLines ? (
+    content.map((_) => <DeputySingle key={_}>{_}</DeputySingle>)
+  ) : (
+    <DeputySingle>{content.join("，")}</DeputySingle>
+  );
   return (
     <DeputyFrame>
       <DeputyTitle>{title}</DeputyTitle>

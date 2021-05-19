@@ -42,7 +42,7 @@ const Root = ({ state, actions }) => {
   );
 
   return (
-    <div id='PC'>
+    <div id='mobile'>
       <Global
         styles={css`
           @media screen and (min-width: 500px) {

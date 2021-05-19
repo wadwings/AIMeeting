@@ -19,8 +19,8 @@ const root = () => {
 					}
 				}
 			`}></Global>
-			<Mobile />
 			<PC />
+			<Mobile />
 		</>
 	)
 }

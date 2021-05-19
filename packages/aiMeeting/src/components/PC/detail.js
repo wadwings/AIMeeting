@@ -8,6 +8,8 @@ const Detail = ({ state, actions }) => {
   const [active, setActive] = useState(0);
   const [displays, setDisplays] = useState([]);
   const [DetailContent, setDetailContent] = useState(null);
+  const { Main, Title, MainBg2, Content, ContentLayout } = common.components;
+  const { fetch } = common;
   const optionText = [
     {
       name: "论坛主会场",
@@ -37,11 +39,11 @@ const Detail = ({ state, actions }) => {
   //fetch data
   const activeUrl = optionText[active].url;
   useEffect(() => {
-    actions.source.fetch("/person");
-    actions.source.fetch("/conference");
+    fetch("/person");
+    fetch("/conference");
   }, []);
   useEffect(async () => {
-    await actions.source.fetch(activeUrl);
+    await fetch(activeUrl);
     setDisplays(
       state.source
         .get(activeUrl)
@@ -93,7 +95,6 @@ const Detail = ({ state, actions }) => {
       ></DisplayContent>
     );
   }
-  const { Main, Title, MainBg2, Content, ContentLayout } = common.components;
   const options = optionText.map(({ name }, i) => (
     <option key={name} value={name}>
       {name}

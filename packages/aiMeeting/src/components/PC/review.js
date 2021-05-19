@@ -7,9 +7,10 @@ import * as common from "./common";
 
 const Review = ({ state, actions }) => {
   const { Main, Title, MainBg2 } = common.components;
+  const { fetch } = common;
   const [imgs, setImgs] = useState([]);
   useEffect(async () => {
-    await actions.source.fetch("/review");
+    await fetch("/review");
     setImgs(
       state.source
         .get("/review")

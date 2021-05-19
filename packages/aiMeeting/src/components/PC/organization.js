@@ -6,18 +6,19 @@ import * as common from "./common";
 
 const Organization = ({ state, actions }) => {
   const { Main, Title, MainBg2 } = common.components;
+  const { fetch } = common;
   const [presidents, setPresidents] = useState([]);
   const [committee, setCommittee] = useState([]);
   const [executive, setExecutive] = useState([]);
   const [promotion, setPromotion] = useState([]);
   const [secretary, setSecretary] = useState([]);
   useEffect(async () => {
-    await actions.source.fetch("/orgaization");
-    await actions.source.fetch("/organization/president");
-    await actions.source.fetch("/organization/committee");
-    await actions.source.fetch("/organization/executive");
-    await actions.source.fetch("/organization/promotion");
-    await actions.source.fetch("/organization/secretary");
+    await fetch("/orgaization");
+    await fetch("/organization/president");
+    await fetch("/organization/committee");
+    await fetch("/organization/executive");
+    await fetch("/organization/promotion");
+    await fetch("/organization/secretary");
     setPresidents(
       state.source
         .get("/organization/president")

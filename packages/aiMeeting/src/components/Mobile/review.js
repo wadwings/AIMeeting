@@ -7,27 +7,28 @@ import * as common from "./common";
 
 const Review = ({ state, actions }) => {
   const { Main, Title, MainBg2 } = common.components;
+  const { fetch } = common;
   const [imgs, setImgs] = useState([]);
   useEffect(async () => {
-    await actions.source.fetch("/review");
-    setImgs(
-      state.source
-        .get("/review")
-        .items.map(({ type, id }) => state.source[type][id])
-        .map(({text, photo}) => <MagicImg key={text} src={photo.guid} word={text}></MagicImg>)
-    );
-  }, []);
+      await fetch( "/review");
+      setImgs(
+        state.source
+          .get("/review")
+          .items.map(({ type, id }) => state.source[type][id])
+          .map(({ text, photo }) => (
+            <MagicImg key={text} src={photo.guid} word={text}></MagicImg>
+          ))
+      );
+    }, []);
   return (
-    <Main id='item6'>
+    <Main id="item6">
       <MainBg2 />
       <Title word="往届回顾" png={reviewPic}></Title>
       <ReviewLayout>
         <Header>首届中国光谷人工智能大会暨企业家高峰论坛（2019）</Header>
         <Img src={groupPic}></Img>
         <P>2019人工智能大会全体人员合影</P>
-        <Grid>
-          {imgs}
-        </Grid>
+        <Grid>{imgs}</Grid>
       </ReviewLayout>
     </Main>
   );
@@ -40,15 +41,18 @@ const ReviewLayout = styled.div({
 });
 
 const MagicImg = (props) => {
-  const [status, setStatus] = useState(0)
+  const [status, setStatus] = useState(0);
   const { src, word } = props;
   return (
-    <MagicDiv onMouseEnter={() => setStatus(1)} onMouseLeave={() => setStatus(0)}>
+    <MagicDiv
+      onMouseEnter={() => setStatus(1)}
+      onMouseLeave={() => setStatus(0)}
+    >
       <Img src={src}></Img>
       <Text show={status}>{word}</Text>
     </MagicDiv>
   );
-}
+};
 
 const Text = styled.div`
   width: 100%;

@@ -5,10 +5,11 @@ import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
 const Guest = ({ state, actions }) => {
-  const { Main, Title, MainBg1, Content, ContentLayout } = common.components;
+  const { Main, Title, MainBg1, Content, ContentLayout} = common.components;
   const [guest, setGuest] = useState([]);
+  const { fetch } = common;
   useEffect(async () => {
-    await actions.source.fetch("/organization/guest");
+    await fetch("/organization/guest");
     setGuest(
       state.source
         .get("/organization/guest").items
