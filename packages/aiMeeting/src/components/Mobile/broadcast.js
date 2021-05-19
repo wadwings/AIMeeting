@@ -4,7 +4,7 @@ import yunPic from "../../assets/img/云端直播.png";
 import * as common from "./common";
 
 const Broadcast = ({}) => {
-  const { Main, Title, MainBg2, Post } = common.components;
+  const { Main, Title, MainBg2, Post, Menu, Option, ActiveOption } = common.components;
   const [active, setActive] = useState(0);
   const optionText = ["视频直播", "照片直播"];
 
@@ -101,33 +101,6 @@ const BroadcastLayout = styled.div({
   flex: 1,
   margin: "2rem",
   overflowY: "auto",
-});
-
-const Menu = styled.div({
-  position: "relative",
-  margin: "0 auto",
-  width: "60vw",
-  height: "2rem",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-});
-
-const Option = styled.div({
-  color: 'grey',
-  textAlign: "center",
-  width: "8rem",
-  fontSize: "1.2rem",
-  cursor: "pointer",
-});
-
-const ActiveOption = styled.div({
-  textAlign: "center",
-  width: "8rem",
-  color: "#042252",
-  fontSize: "1.6rem",
-  cursor: "pointer",
-  borderBottom: "2px #042252 solid",
 });
 
 export default Broadcast;

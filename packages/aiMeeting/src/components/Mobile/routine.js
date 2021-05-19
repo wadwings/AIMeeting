@@ -4,7 +4,7 @@ import rontinePic from "../../assets/img/日程安排.png";
 import * as common from "./common";
 
 const Rontine = () => {
-  const { Main, Title, MainBg2, Post, Content, ContentLayout } = common.components;
+  const { Main, Title, MainBg2, Post, Content, ContentLayout, Menu, Option, ActiveOption } = common.components;
   const [active, setActive] = useState(0);
   const data = [
     {
@@ -44,32 +44,5 @@ const Rontine = () => {
     </Main>
   );
 };
-
-const Menu = styled.div({
-  position: "relative",
-  margin: "0 auto",
-  width: "60vw",
-  height: "2rem",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-});
-
-const Option = styled.div({
-  color: 'grey',
-  textAlign: "center",
-  width: "8rem",
-  fontSize: "1.2rem",
-  cursor: "pointer",
-});
-
-const ActiveOption = styled.div({
-  textAlign: "center",
-  width: "8rem",
-  color: "#042252",
-  fontSize: "1.6rem",
-  cursor: "pointer",
-  borderBottom: "2px #042252 solid",
-});
 
 export default Rontine;

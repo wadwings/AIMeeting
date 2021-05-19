@@ -5,7 +5,7 @@ import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
 const Organization = ({ state, actions }) => {
-  const { Main, Title, MainBg2 } = common.components;
+  const { Main, Title, MainBg2, UnderLine } = common.components;
   const { fetch } = common;
   const [presidents, setPresidents] = useState([]);
   const [committee, setCommittee] = useState([]);
@@ -69,6 +69,7 @@ const Organization = ({ state, actions }) => {
       <Title word="组织架构" png={structPic}></Title>
       <OrganizationLayout>
         <Grid>{presidents}</Grid>
+        <UnderLine />
         <Deputy title="执行主席" content={committee}></Deputy>
         <Deputy title="程序委员会主席" content={executive}></Deputy>
         <Deputy title="推广主席" content={promotion}></Deputy>
@@ -140,12 +141,12 @@ const DisplayPic = styled.img`
 const DisplayFrame = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: calc(100vw * 9 / 32);
+  grid-template-rows: auto;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 2rem;
 `;
 

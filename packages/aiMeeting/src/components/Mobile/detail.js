@@ -212,11 +212,11 @@ const Select = styled.select`
   font-size: 1rem;
 `;
 
-const Grid = styled.div`
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin: 3rem;
-`;
+const Grid = styled.div({
+  display: 'grid',
+  gridGap: '2rem',
+  gridTemplateColumns: '1fr 1fr',
+  margin: '3rem'
+})
 
 export default connect(Detail);

@@ -1,23 +1,13 @@
 import { connect, Global, css, styled } from "frontity";
 import * as common from "./common";
 import React, { useState, useEffect } from "react";
-import bgLayer1 from "../../assets/img/bgLayer1.png";
-import bgLayer2 from "../../assets/img/bgLayer2.png";
+import background from '../../assets/img/移动端背景图.png'
 import logo from "../../assets/img/logo.png";
 import titleImg from "../../assets/img/标题.png";
-import themeImg from "../../assets/img/主题.png";
+import themeImg from "../../assets/img/移动端slogan.png";
 import positionImg from "../../assets/img/时间地点.png";
 
 const Root = ({ state, actions }) => {
-  const option = [
-    "组织架构",
-    "日程安排",
-    "论坛详情",
-    "大会指引",
-    "云端直播",
-    "往届回顾",
-  ];
-  const [active, setActive] = useState(0);
   const {
     Detail,
     Guide,
@@ -29,17 +19,8 @@ const Root = ({ state, actions }) => {
     Sponsor,
     Broadcast,
   } = common.pages;
-  const options = option.map((_, i) =>
-    i == active ? (
-      <ActiveOption href={`#item${i + 1}`} onClick={() => setActive(i)} key={i}>
-        {_}
-      </ActiveOption>
-    ) : (
-      <Option href={`#item${i + 1}`} key={i} onClick={() => setActive(i)}>
-        {_}
-      </Option>
-    )
-  );
+
+  const { Main} = common.components;
 
   return (
     <div id='mobile'>
@@ -52,22 +33,22 @@ const Root = ({ state, actions }) => {
           }
           @media screen and (min-width: 800px) {
             html {
-              font-size: 16px;
+              font-size: 14px;
             }
           }
           @media screen and (min-width: 1200px) {
             html {
-              font-size: 20px;
+              font-size: 18px;
             }
           }
           @media screen and (min-width: 1600px) {
             html {
-              font-size: 24px;
+              font-size: 22px;
             }
           }
           @media screen and (min-width: 2000px) {
             html {
-              font-size: 28px;
+              font-size: 26px;
             }
           }
           html {
@@ -83,11 +64,9 @@ const Root = ({ state, actions }) => {
           }
         `}
       />
-      <BgImg src={bgLayer1}></BgImg>
-      <BgImg src={bgLayer2}></BgImg>
+      <BgImg src={background}></BgImg>
       <Logo src={logo}></Logo>
       <Main>
-        <Menu>{options}</Menu>
         <Title src={titleImg}></Title>
         <Theme src={themeImg}></Theme>
         <Title src={positionImg}></Title>
@@ -105,11 +84,6 @@ const Root = ({ state, actions }) => {
   );
 };
 
-const Main = styled.div`
-  width: 100%;
-  min-height: calc(100vw / 16 * 9);
-`;
-
 const BgImg = styled.img`
   width: 100%;
   position: absolute;
@@ -122,48 +96,19 @@ const Logo = styled.img`
   width: 7rem;
 `;
 
-const Menu = styled.div`
-  position: relative;
-  margin: 0 auto;
-  width: 70vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem;
-`;
+const Title = styled.img({
+  position: 'relative',
+  top: '15vh',
+  width: '70%',
+  padding: '1.5rem 15% 0 15%'
+})
 
-const Option = styled.a({
-  display: "block",
-  textAlign: "center",
-  width: "8rem",
-  fontSize: "1.2rem",
-  cursor: "pointer",
-  textDecoration: "none",
-  color: "white",
-});
 
-const ActiveOption = styled.a({
-  display: "block",
-  textAlign: "center",
-  width: "8rem",
-  color: "#8adbff",
-  fontSize: "1.6rem",
-  padding: "0.2rem 0.4rem",
-  cursor: "pointer",
-  textDecoration: "none",
-  borderBottom: "1px #8adbff solid",
-});
-
-const Title = styled.img`
-  position: relative;
-  width: 50%;
-  padding: 1.5rem 25% 0 25%;
-`;
-
-const Theme = styled.img`
-  position: relative;
-  width: 70%;
-  padding: 1.5rem 15%;
-`;
+const Theme = styled.img({
+  position: 'relative',
+  top: '15vh',
+  width: '80%',
+  padding: '1.5rem 10%',
+})
 
 export default connect(Root);

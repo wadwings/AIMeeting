@@ -18,13 +18,18 @@ const Title = (props) => {
   return(
     <TitleFrame>
       <TitleImg src={png}></TitleImg>
-      {word}
+      <TitleText >{word}</TitleText>
     </TitleFrame>
   )
 }
 
+const TitleText = styled.p({
+  whiteSpace: 'nowrap',
+  fontSize: '1.5rem'
+})
+
 const TitleImg = styled.img`
-  height: inherit;
+  height: 1.5rem;
   padding: 0 0.8rem 0 0.2rem;
 `
 
@@ -44,8 +49,8 @@ const TitleFrame = styled.div({
 })
 
 const UnderLine = styled.div`
-  width: 80vw;
-  margin: 0 auto 1rem auto;
+  width: 80%;
+  margin: 1rem auto;
   border: 0.04rem #041c45 solid;
 `
 
@@ -54,7 +59,8 @@ const Main = styled.div({
   display: 'flex',
   flexFlow: 'column',
   width: '100%',
-  height: 'calc(100vw / 16 * 9)',
+  minHeight: 'calc(100vw * 1.48)',
+  maxHeight: '90vh',
   overflow: 'hidden'
 })
 
@@ -95,7 +101,7 @@ const PostFrame = styled.div({
 })
 
 const ContentLayout = styled.div({
-  margin: "2rem 4rem",
+  margin: "2rem 1rem",
   flex: 1,
   overflowY: "auto",
 });
@@ -108,6 +114,33 @@ const Content = styled.div({
 
 })
 
+const Menu = styled.div({
+  position: "relative",
+  margin: "0 auto",
+  width: "80vw",
+  height: "2rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+});
+
+const Option = styled.div({
+  color: 'grey',
+  textAlign: "center",
+  width: "7rem",
+  fontSize: "1.2rem",
+  cursor: "pointer",
+});
+
+const ActiveOption = styled.div({
+  textAlign: "center",
+  width: "7rem",
+  color: "#042252",
+  fontSize: "1.4rem",
+  cursor: "pointer",
+  borderBottom: "2px #042252 solid",
+});
+
 const Post = connect(PostUnconnect)
 
 const components = {
@@ -118,7 +151,10 @@ const components = {
   MainBg2,
   Post,
   ContentLayout,
-  Content
+  Content,
+  Menu,
+  Option,
+  ActiveOption
 }
 
 const pages = {

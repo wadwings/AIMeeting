@@ -59,6 +59,7 @@ const Text = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.1);
   transition: 0.5s;
+  font-size: 0.8rem;
   position: absolute;
   transform: ${(props) => (props.show === 1 ? "none" : "translate(0, 100%)")};
   bottom: 0;
@@ -81,7 +82,8 @@ const Header = styled.div`
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 3.5vw;
+  text-align: center;
 `;
 
 const Img = styled.img`
@@ -95,8 +97,7 @@ const P = styled.p`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin: 2rem;
-  grid-gap: 2rem;
+  grid-gap: 1rem;
 `;
 
 export default connect(Review);

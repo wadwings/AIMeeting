@@ -51,8 +51,8 @@ const GuestSingle = (props) => {
 const GuestLayout = styled.div({
   position: "relative",
   display: "grid",
-  gridTemplateColumns: "1fr 1fr 1fr",
-  gridTemplateRows: "calc(100vw / 16 * 9 - 10rem)",
+  gridTemplateColumns: "1fr 1fr",
+  gridTemplateRows: "50%",
   gridGap: "2rem",
 });
 
