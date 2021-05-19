@@ -23,9 +23,9 @@ const settings = {
               archive: "/person",
             },
             {
-              type: "review",
-              endpoint: "review",
-              archive: "/review",
+              type: "photograph",
+              endpoint: "photograph",
+              archive: "/photograph",
             }
           ],
           taxonomies: [
@@ -33,19 +33,16 @@ const settings = {
               taxonomy: "conference",
               endpoint: "conference",
               postTypeEndpoint: "person",
-              params: {
-                per_page: 5,
-                _embed: true,
-              },
+            },
+            {
+              taxonomy: "usage",
+              endpoint: "usage",
+              postTypeEndpoint: "photograph",
             },
             {
               taxonomy: "organization",
               endpoint: "organization",
               postTypeEndpoint: "person",
-              params: {
-                per_page: 5,
-                _embed: true,
-              },
             },
           ]
         },

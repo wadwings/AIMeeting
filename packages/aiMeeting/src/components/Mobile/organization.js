@@ -107,12 +107,12 @@ const DeputyFrame = styled.div({
 
 const DeputyTitle = styled.div({
   margin: "0.5rem",
-  marginLeft: "15%",
+  marginLeft: "5%",
 });
 
 const DeputySingle = styled.div({
   margin: "0.25rem",
-  marginLeft: "30%",
+  marginLeft: "10%",
 });
 
 const Display = (props) => {
@@ -121,7 +121,8 @@ const Display = (props) => {
     <DisplayFrame>
       <DisplayPic src={pic}></DisplayPic>
       <DisplayText>
-        <h3>主席：{name}</h3>
+        <DisplayName>主席：</DisplayName>
+        <DisplayName>{name}</DisplayName>
         <p>重要荣誉：</p>
         <p>{achievement}</p>
       </DisplayText>
@@ -129,9 +130,17 @@ const Display = (props) => {
   );
 };
 
-const DisplayText = styled.div`
-  margin: 1rem;
-`;
+const DisplayName = styled.div({
+  fontSize: "1.2rem",
+  fontWeight: 'bold',
+  ':last-child':{
+    marginBottom: '1rem'
+  }
+})
+const DisplayText = styled.div({
+  margin: '1rem',
+  marginTop: 0,
+})
 
 const DisplayPic = styled.img`
   height: inherit;

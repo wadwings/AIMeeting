@@ -10,12 +10,12 @@ const Review = ({ state, actions }) => {
   const { fetch } = common;
   const [imgs, setImgs] = useState([]);
   useEffect(async () => {
-    await fetch("/review");
+    await fetch("/photograph");
     setImgs(
       state.source
-        .get("/review")
+        .get("/photograph")
         .items.map(({ type, id }) => state.source[type][id])
-        .map(({text, photo}) => <MagicImg key={text} src={photo.guid} word={text}></MagicImg>)
+        .map(({text, picture}) => <MagicImg key={text} src={picture.guid} word={text}></MagicImg>)
     );
   }, []);
   return (

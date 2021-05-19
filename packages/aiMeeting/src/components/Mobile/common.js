@@ -108,7 +108,7 @@ const ContentLayout = styled.div({
 
 const Content = styled.div({
   minHeight: 'calc(100% - 4rem)',
-  padding: "2rem",
+  padding: "1rem",
   position: 'relative',
   backgroundColor: "rgba(255,255,255, 0.6)",
 
