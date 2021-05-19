@@ -1,5 +1,5 @@
 {
-  "name": "frontity",
+  "name": "aimeeting",
   "version": "1.0.0",
   "private": true,
   "description": "Frontity project",
@@ -19,9 +19,14 @@
   "dependencies": {
     "@frontity/core": "^1.13.0",
     "@frontity/html2react": "^1.6.2",
+    "@frontity/mars-theme": "./packages/mars-theme",
     "@frontity/tiny-router": "^1.4.2",
     "@frontity/wp-source": "^1.11.4",
-    "frontity": "^1.15.0",
-    "my-first-theme": "file:packages/my-first-theme"
+    "@types/ua-parser-js": "^0.7.36",
+    "aiMeeting": "./packages/aiMeeting",
+    "frontity": "^1.15.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.0"
   }
 }

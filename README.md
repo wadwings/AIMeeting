@@ -1,4 +1,4 @@
-# frontity
+# aimeeting
 
 This project was bootstrapped with [Frontity](https://frontity.org/).
 
