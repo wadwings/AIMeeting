@@ -53,18 +53,11 @@ const Broadcast = ({preIndex, setIndex}) => {
 const Photobroadcast = ({src}) => {
   const photos = src.map(({url, text}) => <MagicImg key={text} src={url} word={text}></MagicImg>)
   return (
-    <PhotosLayout>
+    <>
       {photos}
-    </PhotosLayout>
+    </>
   )
 }
-
-const PhotosLayout = styled.div({
-  display: 'grid',
-  gridAutoRows: '66vh',
-  gridTemplateColumns: '1fr',
-  gridGap: '2rem'
-})
 
 const MagicImg = (props) => {
   const [status, setStatus] = useState(0);
@@ -99,7 +92,7 @@ const Text = styled.div`
 const MagicDiv = styled.div`
   position: relative;
   overflow: hidden;
-  max-height: 100%;
+  height: 66%;
   max-width: 100%;
   margin: 0 auto;
 `;
@@ -184,7 +177,7 @@ const BroadcastLayout = styled.div({
 const Menu = styled.div({
   position: "relative",
   margin: "0 auto",
-  width: "60vw",
+  width: "80%",
   height: "2rem",
   display: "flex",
   alignItems: "center",

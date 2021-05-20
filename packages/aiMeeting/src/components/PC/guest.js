@@ -48,7 +48,7 @@ const GuestLayout = styled.div({
   position: "relative",
   display: "grid",
   gridTemplateColumns: "1fr 1fr 1fr",
-  gridAutoRows: "calc(100vw / 16 * 9 - 10rem)",
+  gridAutoRows: "60%",
   gridGap: "2rem",
   maxWidth: "100%"
 });

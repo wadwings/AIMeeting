@@ -45,7 +45,7 @@ const Guide = ({preIndex, setIndex}) => {
 const Menu = styled.div({
   position: "relative",
   margin: "0 auto",
-  width: "60vw",
+  width: "80%",
   height: "2rem",
   display: "flex",
   alignItems: "center",

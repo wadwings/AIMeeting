@@ -142,7 +142,7 @@ const DisplayPic = styled.img`
 const DisplayFrame = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: calc(100vw * 9 / 32);
+  height: auto;
 `;
 
 const Grid = styled.div`
