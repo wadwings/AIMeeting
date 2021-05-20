@@ -63,7 +63,6 @@ const GuestFrame = styled.div({
 });
 
 const GuestPic = styled.img({
-  height: "70%",
   maxWidth: "100%",
 });
 

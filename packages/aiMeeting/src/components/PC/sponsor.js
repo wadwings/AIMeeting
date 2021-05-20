@@ -7,6 +7,7 @@ const Sponsor = () => {
   const {Main, Title, MainBg1, Post, Content, ContentLayout} = common.components;
   return(
     <Main>
+      <div id='sponsor' css={css`position:absolute;top:-5rem;`}></div>
       <MainBg1/>
       <Title word='参展赞助' png={sponsorPic}></Title>
       <ContentLayout>

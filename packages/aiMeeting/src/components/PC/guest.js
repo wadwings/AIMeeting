@@ -19,6 +19,7 @@ const Guest = ({ state, actions }) => {
   }, []);
   return (
     <Main>
+      <div id='guest' css={css`position:absolute;top:-5rem;`}></div>
       <MainBg1 />
       <Title word="主要嘉宾" png={guestPic}></Title>
       <ContentLayout>
@@ -47,7 +48,7 @@ const GuestLayout = styled.div({
   position: "relative",
   display: "grid",
   gridTemplateColumns: "1fr 1fr 1fr",
-  gridTemplateRows: "calc(100vw / 16 * 9 - 10rem)",
+  gridAutoRows: "calc(100vw / 16 * 9 - 10rem)",
   gridGap: "2rem",
 });
 

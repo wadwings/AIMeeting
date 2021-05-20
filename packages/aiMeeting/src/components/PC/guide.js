@@ -4,9 +4,8 @@ import guidePic from "../../assets/img/大会指引.png";
 import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
-const Guide = () => {
+const Guide = ({preIndex, setIndex}) => {
   const { Main, Title, MainBg2, Post, Content, ContentLayout } = common.components;
-  const [active, setActive] = useState(0);
   const data = [
     {
       title: "投稿通知",
@@ -22,20 +21,21 @@ const Guide = () => {
     },
   ];
   const options = data.map((_, i) =>
-    i === active ? (
-      <ActiveOption onClick={() => setActive(i)} key={_.title}>{_.title}</ActiveOption>
+    i === preIndex ? (
+      <ActiveOption onClick={() => setIndex(i)} key={_.title}>{_.title}</ActiveOption>
     ) : (
-      <Option onClick={() => setActive(i)} key={_.title}>{_.title}</Option>
+      <Option onClick={() => setIndex(i)} key={_.title}>{_.title}</Option>
     )
   );
   return (
-    <Main id='item4'>
+    <Main>
+      <div id='item4' css={css`position:absolute;top:-5rem;`}></div>
       <MainBg2 />
       <Title word="大会指引" png={guidePic}></Title>
       <Menu>{options}</Menu>
       <ContentLayout>
         <Content>
-          <Post url={data[active].url}></Post>
+          <Post url={data[preIndex].url}></Post>
         </Content>
       </ContentLayout>
     </Main>

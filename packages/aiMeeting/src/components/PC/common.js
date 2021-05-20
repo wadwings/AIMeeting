@@ -27,7 +27,6 @@ function fetch(url) {
   }
 
   let req = frontity.actions.source.fetch(url);
-  console.log(cache)
   cache.set(url, {
     status: "pending",
     req,
@@ -55,10 +54,15 @@ const Title = (props) => {
   return (
     <TitleFrame>
       <TitleImg src={png}></TitleImg>
-      {word}
+      <TitleText>{word}</TitleText>
     </TitleFrame>
   );
 };
+
+const TitleText = styled.p({
+  whiteSpace: 'nowrap',
+  fontSize: '1.5rem'
+})
 
 const TitleImg = styled.img`
   height: inherit;
@@ -70,7 +74,7 @@ const TitleFrame = styled.div({
   padding: "0.5rem",
   position: "relative",
   fontSize: "1.5rem",
-  color: "black",
+  color: "white",
   fontWeight: 500,
   display: "flex",
   alignItems: "center",
@@ -78,6 +82,7 @@ const TitleFrame = styled.div({
   margin: "0.5rem auto",
   border: "2px solid #041c45",
   borderRadius: "3rem",
+  background: '#041c45'
 });
 
 const UnderLine = styled.div`

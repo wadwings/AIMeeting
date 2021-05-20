@@ -31,7 +31,6 @@ const Review = ({ state, actions }) => {
       setActive(active + n)
     }
   }
-  console.log(imgs);
 
   return (
     <Main id="item6">
@@ -104,7 +103,7 @@ const Prev = styled.img({
 const Text = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
   transition: 0.5s;
   font-size: 0.8rem;
   position: absolute;

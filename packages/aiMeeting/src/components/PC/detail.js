@@ -78,7 +78,6 @@ const Detail = ({ state, actions }) => {
     const value = e.target.value;
     for (let i = optionText.length - 1; i--; i >= 0) {
       if (optionText[i].name === value) {
-        console.log("set active to: ", i);
         setActive(i);
         return;
       }
@@ -102,7 +101,8 @@ const Detail = ({ state, actions }) => {
   ));
 
   return (
-    <Main id='item3'>
+    <Main>
+      <div id='item3' css={css`position:absolute;top:-5rem;`}></div>
       <MainBg2 />
       <Title word="论坛详情" png={detailPic}></Title>
       <Center>
@@ -113,7 +113,11 @@ const Detail = ({ state, actions }) => {
           <Content>{DetailContent}</Content>
         </ContentLayout>
       ) : (
-        <Grid>{displays}</Grid>
+        <ContentLayout>
+          <Content>
+          <Grid>{displays}</Grid>
+          </Content>
+        </ContentLayout>
       )}
     </Main>
   );
@@ -205,7 +209,6 @@ const Grid = styled.div`
   display: grid;
   grid-gap: 2rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin: 3rem;
 `;
 
 export default connect(Detail);

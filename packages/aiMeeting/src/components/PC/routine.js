@@ -1,11 +1,10 @@
 import { connect, Global, css, styled } from "frontity";
-import React, { useState } from "react";
+import React from "react";
 import rontinePic from "../../assets/img/日程安排.png";
 import * as common from "./common";
 
-const Rontine = () => {
+const Rontine = ({preIndex, setIndex}) => {
   const { Main, Title, MainBg2, Post, Content, ContentLayout } = common.components;
-  const [active, setActive] = useState(0);
   const data = [
     {
       title: "7月23日",
@@ -21,24 +20,25 @@ const Rontine = () => {
     },
   ];
   const options = data.map((_, i) =>
-    i === active ? (
-      <ActiveOption onClick={() => setActive(i)} key={_.title}>
+    i === preIndex ? (
+      <ActiveOption onClick={() => setIndex(i)} key={_.title}>
         {_.title}
       </ActiveOption>
     ) : (
-      <Option onClick={() => setActive(i)} key={_.title}>
+      <Option onClick={() => setIndex(i)} key={_.title}>
         {_.title}
       </Option>
     )
   );
   return (
-    <Main  id='item2'>
+    <Main>
+      <div id='item2' css={css`position:absolute;top:-5rem;`}></div>
       <MainBg2 />
       <Title word="日程安排" png={rontinePic}></Title>
       <Menu>{options}</Menu>
       <ContentLayout>
         <Content>
-          <Post url={data[active].url}></Post>
+          <Post url={data[preIndex].url}></Post>
         </Content>
       </ContentLayout>
     </Main>

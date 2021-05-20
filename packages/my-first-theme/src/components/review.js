@@ -67,7 +67,7 @@ class MagicImg extends React.Component {
 const Text = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
   transition: 0.5s; 
   position: absolute;
   transform: ${props => props.show === 1 ? 'none': 'translate(0, 100%)'};
@@ -77,20 +77,6 @@ const Text = styled.div`
   display:flex;
   align-items: center;
   justify-content: center;
-`
-
-const ShowText = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  transition: 0.5s; 
-  position: absolute;
-  bottom: 0;
-  opacity: 1;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
 `
 
 const MagicDiv = styled.div`

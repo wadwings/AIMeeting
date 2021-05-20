@@ -10,16 +10,17 @@ const Review = ({ state, actions }) => {
   const { fetch } = common;
   const [imgs, setImgs] = useState([]);
   useEffect(async () => {
-    await fetch("/photograph");
+    await fetch("/usage/review");
     setImgs(
       state.source
-        .get("/photograph")
+        .get("/usage/review")
         .items.map(({ type, id }) => state.source[type][id])
         .map(({text, picture}) => <MagicImg key={text} src={picture.guid} word={text}></MagicImg>)
     );
   }, []);
   return (
-    <Main id='item6'>
+    <Main>
+      <div id='item6' css={css`position:absolute;top:-5rem;`}></div>
       <MainBg2 />
       <Title word="往届回顾" png={reviewPic}></Title>
       <ReviewLayout>
@@ -54,7 +55,7 @@ const MagicImg = (props) => {
 const Text = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
   transition: 0.5s;
   position: absolute;
   transform: ${(props) => (props.show === 1 ? "none" : "translate(0, 100%)")};

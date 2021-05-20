@@ -15,7 +15,7 @@ const Broadcast = ({ state }) => {
     ContentLayout,
   } = common.components;
   const { fetch } = common;
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const [photo, setPhoto] = useState([]);
   const optionText = ["视频直播", "照片直播"];
   async function updatePhotos() {
@@ -93,7 +93,7 @@ const MagicImg = (props) => {
 const Text = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
   transition: 0.5s;
   font-size: 0.8rem;
   position: absolute;

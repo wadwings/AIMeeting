@@ -9,15 +9,97 @@ import themeImg from "../../assets/img/主题.png";
 import positionImg from "../../assets/img/时间地点.png";
 
 const Root = ({ state, actions }) => {
-  const option = [
-    "组织架构",
-    "日程安排",
-    "论坛详情",
-    "大会指引",
-    "云端直播",
-    "往届回顾",
-  ];
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState("大会详情");
+  const [routine, setRoutine] = useState(0);
+  const [broadcast, setBroadcast] = useState(0);
+  const [guide, setGuide] = useState(0);
+  console.log(routine)
+  const option = {
+    大会详情: {
+      type: "list",
+      list: [
+        {
+          name: "大会介绍",
+          url: "intro",
+        },
+        {
+          name: "主要嘉宾",
+          url: "guest",
+        },
+        {
+          name: "参展赞助",
+          url: "sponsor",
+        },
+      ],
+    },
+    组织架构: {
+      type: "url",
+      url: "#item1",
+    },
+    日程安排: {
+      type: "list",      
+      list: [
+        {
+          name: "7月23日",
+          url: "item2",
+          click: () => setRoutine(0)
+        },
+        {
+          name: "7月24日",
+          url: "item2",
+          click: () => setRoutine(1)
+        },
+        {
+          name: "7月25日",
+          url: "item2",
+          click: () => setRoutine(2)
+        },
+      ],
+    },
+    论坛详情: {
+      type: "url",
+      url: "#item3",
+    },
+    大会指引: {
+      type: "list",
+      list: [
+        {
+          name: "投稿通知",
+          url: "item4",
+          click: () => setGuide(0)
+        },
+        {
+          name: "会议记录",
+          url: "item4",
+          click: () => setGuide(1)
+        },
+        {
+          name: "住宿交通",
+          url: "item4",
+          click: () => setGuide(2)
+        },
+      ],
+    },
+    云端直播: {
+      type: "list",
+      list: [
+        {
+          name: "视频直播",
+          url: "item5",
+          click: () => setBroadcast(0)
+        },
+        {
+          name: "图片直播",
+          url: "item5",
+          click: () => setBroadcast(1)
+        },
+      ],
+    },
+    往届回顾: {
+      type: "url",
+      url: "#item6",
+    },
+  };
   const {
     Detail,
     Guide,
@@ -29,20 +111,36 @@ const Root = ({ state, actions }) => {
     Sponsor,
     Broadcast,
   } = common.pages;
-  const options = option.map((_, i) =>
-    i == active ? (
-      <ActiveOption href={`#item${i + 1}`} onClick={() => setActive(i)} key={i}>
-        {_}
-      </ActiveOption>
-    ) : (
-      <Option href={`#item${i + 1}`} key={i} onClick={() => setActive(i)}>
-        {_}
-      </Option>
-    )
-  );
+  const options = [];
+
+  for (let [key, value] of Object.entries(option)) {
+    if (value.type === "url") {
+      options.push(
+        active === key ? (
+          <ActiveOption key={key} href={value.url} onClick={() => setActive(key)}>
+            {key}
+          </ActiveOption>
+        ) : (
+          <Option key={key} href={value.url} onClick={() => setActive(key)}>
+            {key}
+          </Option>
+        )
+      );
+    } else {
+      options.push(
+        <SubList
+          key={key}
+          active={key === active}
+          name={key}
+          list={value.list}
+          click={setActive}
+        ></SubList>
+      );
+    }
+  }
 
   return (
-    <div id='PC'>
+    <div id="PC">
       <Global
         styles={css`
           @media screen and (min-width: 500px) {
@@ -88,6 +186,7 @@ const Root = ({ state, actions }) => {
       <Logo src={logo}></Logo>
       <Main>
         <Menu>{options}</Menu>
+        <div css={css`height:4rem`}></div>
         <Title src={titleImg}></Title>
         <Theme src={themeImg}></Theme>
         <Title src={positionImg}></Title>
@@ -96,14 +195,76 @@ const Root = ({ state, actions }) => {
       <Guest />
       <Sponsor />
       <Organization />
-      <Routine />
+      <Routine preIndex={routine} setIndex={setRoutine}/>
       <Detail />
-      <Guide />
-      <Broadcast />
+      <Guide preIndex={guide} setIndex={setGuide}/>
+      <Broadcast preIndex={broadcast} setIndex={setBroadcast}/>
       <Review />
     </div>
   );
 };
+
+const SubList = ({ active, name, list, click }) => {
+  const [opacity, setOpacity] = useState(0);
+  let timeout = 0;
+  const content = list.map((_) => 
+    <SubListOption key={_.name} href={`#${_.url}`} onClick={_.click}>
+      {_.name}
+    </SubListOption>
+  );
+  const onClick = () => {
+    click(name)
+    setOpacity((opacity + 1) % 2);
+    clearTimeout(timeout);
+    timeout = setTimeout(() => setOpacity(0), 5000);
+  }
+  return  (
+    <SubListBlock active={active} onClick={onClick}>
+      {name}
+      <SubListLayout opacity={opacity}>{content}</SubListLayout>
+    </SubListBlock>
+  )
+};
+
+const SubListBlock = styled.div(({active}) =>({
+  position: 'relative',
+  display: "block",
+  textAlign: "center",
+  width: "8rem",
+  cursor: "pointer",
+  color: active ? "#8adbff" : "white",
+  fontSize: active ? "1.4rem" : "1.2rem",
+  padding: active ? "0.2rem 0.4rem" : "none",
+  borderBottom: active ? "1px #8adbff solid": "none",
+}))
+
+const SubListLayout = styled.div(({opacity}) => ({
+  transition: '0.5s',
+  display: "flex",
+  flexFlow: "column",
+  position: "absolute",
+  bottom: "-0.2rem",
+  left: "0.4rem",
+  opacity: opacity,
+  transform: 'translateY(100%)',
+  background: 'rgba(0,0,0,0.2)'
+}));
+
+const SubListOption = styled.a({
+  position: 'relative',
+  display: "block",
+  color: "white",
+  textDecoration: "none",
+  width: "8rem",
+  fontSize: "1.4rem",
+  padding: '0.5rem 0',
+  textAlign: "center",
+  pointer: 'cursor',
+  zIndex: 2,
+  ":visited": {
+    color: "white",
+  },
+});
 
 const Main = styled.div`
   width: 100%;
@@ -122,17 +283,19 @@ const Logo = styled.img`
   width: 7rem;
 `;
 
-const Menu = styled.div`
-  position: relative;
-  margin: 0 auto;
-  width: 70vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem;
-`;
+const Menu = styled.div({
+  position: 'absolute',
+  top: 0,
+  width: '80vw',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: '1.2rem 10vw',
+  zIndex: 1,
+})
 
 const Option = styled.a({
+  position: 'relative',
   display: "block",
   textAlign: "center",
   width: "8rem",
@@ -143,11 +306,12 @@ const Option = styled.a({
 });
 
 const ActiveOption = styled.a({
+  position: 'relative',
   display: "block",
   textAlign: "center",
   width: "8rem",
   color: "#8adbff",
-  fontSize: "1.6rem",
+  fontSize: "1.4rem",
   padding: "0.2rem 0.4rem",
   cursor: "pointer",
   textDecoration: "none",

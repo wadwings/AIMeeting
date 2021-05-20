@@ -70,7 +70,8 @@ const Organization = ({ state, actions }) => {
     );
   }, []);
   return (
-    <Main id='item1'>
+    <Main>
+      <div id='item1' css={css`position:absolute;top:-5rem;`}></div>
       <MainBg2 />
       <Title word="组织架构" png={structPic}></Title>
       <OrganizationLayout>

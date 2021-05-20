@@ -161,7 +161,7 @@ const Content = styled.div`
 
   blockquote {
     margin: 16px 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
     border-left: 4px solid rgba(12, 17, 43);
     padding: 4px 16px;
   }

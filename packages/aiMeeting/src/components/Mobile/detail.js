@@ -78,7 +78,6 @@ const Detail = ({ state, actions }) => {
     const value = e.target.value;
     for (let i = optionText.length - 1; i--; i >= 0) {
       if (optionText[i].name === value) {
-        console.log("set active to: ", i);
         setActive(i);
         return;
       }
