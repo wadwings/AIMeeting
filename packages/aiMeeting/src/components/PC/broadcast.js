@@ -5,11 +5,11 @@ import * as common from "./common";
 
 const Broadcast = ({preIndex, setIndex}) => {
   const {state} = useConnect();
+  const {fetch} = common;
   const { Main, Title, MainBg2 } = common.components;
   const [photo, setPhoto] = useState([]);
   const optionText = ["视频直播", "照片直播"];
   async function updatePhotos() {
-    await fetch("/usage");
     await fetch("/usage/broadcast");
     setPhoto(
       state.source

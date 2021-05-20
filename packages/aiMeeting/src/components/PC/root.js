@@ -13,7 +13,6 @@ const Root = ({ state, actions }) => {
   const [routine, setRoutine] = useState(0);
   const [broadcast, setBroadcast] = useState(0);
   const [guide, setGuide] = useState(0);
-  console.log(routine)
   const option = {
     大会详情: {
       type: "list",
