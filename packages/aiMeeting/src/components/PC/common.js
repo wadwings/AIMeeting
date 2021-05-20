@@ -96,8 +96,13 @@ const Main = styled.div({
   display: "flex",
   flexFlow: "column",
   width: "100%",
+  maxWidth: '1000px',
+  margin: '0 auto',
   height: "calc(100vw / 16 * 9)",
   overflow: "hidden",
+  '@media screen and (min-width: 1000px)': {
+    height: '562.5px'
+  }
 });
 
 const BgImg = styled.img({

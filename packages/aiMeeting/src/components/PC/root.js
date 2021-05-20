@@ -9,7 +9,7 @@ import themeImg from "../../assets/img/主题.png";
 import positionImg from "../../assets/img/时间地点.png";
 
 const Root = ({ state, actions }) => {
-  const [active, setActive] = useState("大会详情");
+  const [active, setActive] = useState();
   const [routine, setRoutine] = useState(0);
   const [broadcast, setBroadcast] = useState(0);
   const [guide, setGuide] = useState(0);
@@ -116,21 +116,15 @@ const Root = ({ state, actions }) => {
   for (let [key, value] of Object.entries(option)) {
     if (value.type === "url") {
       options.push(
-        active === key ? (
-          <ActiveOption key={key} href={value.url} onClick={() => setActive(key)}>
-            {key}
-          </ActiveOption>
-        ) : (
           <Option key={key} href={value.url} onClick={() => setActive(key)}>
             {key}
           </Option>
-        )
       );
     } else {
       options.push(
         <SubList
           key={key}
-          active={key === active}
+          active={active === key ? 1 :0}
           name={key}
           list={value.list}
           click={setActive}
@@ -205,23 +199,18 @@ const Root = ({ state, actions }) => {
 };
 
 const SubList = ({ active, name, list, click }) => {
-  const [opacity, setOpacity] = useState(0);
-  let timeout = 0;
   const content = list.map((_) => 
     <SubListOption key={_.name} href={`#${_.url}`} onClick={_.click}>
       {_.name}
     </SubListOption>
   );
   const onClick = () => {
-    click(name)
-    setOpacity((opacity + 1) % 2);
-    clearTimeout(timeout);
-    timeout = setTimeout(() => setOpacity(0), 5000);
+    !active ? click(name) : click('')
   }
   return  (
-    <SubListBlock active={active} onClick={onClick}>
+    <SubListBlock onClick={onClick}>
       {name}
-      <SubListLayout opacity={opacity}>{content}</SubListLayout>
+      <SubListLayout opacity={active}>{content}</SubListLayout>
     </SubListBlock>
   )
 };
@@ -232,10 +221,10 @@ const SubListBlock = styled.div(({active}) =>({
   textAlign: "center",
   width: "8rem",
   cursor: "pointer",
-  color: active ? "#8adbff" : "white",
-  fontSize: active ? "1.4rem" : "1.2rem",
-  padding: active ? "0.2rem 0.4rem" : "none",
-  borderBottom: active ? "1px #8adbff solid": "none",
+  color: "white",
+  fontSize: "1.2rem",
+  padding: "none",
+  borderBottom: "none",
 }))
 
 const SubListLayout = styled.div(({opacity}) => ({
@@ -243,11 +232,11 @@ const SubListLayout = styled.div(({opacity}) => ({
   display: "flex",
   flexFlow: "column",
   position: "absolute",
-  bottom: "-0.2rem",
-  left: "0.4rem",
   opacity: opacity,
-  transform: 'translateY(100%)',
-  background: 'rgba(0,0,0,0.2)'
+  bottom: '-1.2rem',
+  transform: !opacity ? 'none': 'translateY(100%)',
+  visibility: opacity ? 'visible' : 'hidden',
+  background: 'rgba(0,0,0,0.5)'
 }));
 
 const SubListOption = styled.a({
@@ -256,7 +245,7 @@ const SubListOption = styled.a({
   color: "white",
   textDecoration: "none",
   width: "8rem",
-  fontSize: "1.4rem",
+  fontSize: "1.2rem",
   padding: '0.5rem 0',
   textAlign: "center",
   pointer: 'cursor',
@@ -284,8 +273,9 @@ const Logo = styled.img`
 `;
 
 const Menu = styled.div({
-  position: 'absolute',
+  position: 'fixed',
   top: 0,
+  backgroundColor: 'rgba(0,0,0,0.5)',
   width: '80vw',
   display: 'flex',
   alignItems: 'center',
@@ -303,19 +293,6 @@ const Option = styled.a({
   cursor: "pointer",
   textDecoration: "none",
   color: "white",
-});
-
-const ActiveOption = styled.a({
-  position: 'relative',
-  display: "block",
-  textAlign: "center",
-  width: "8rem",
-  color: "#8adbff",
-  fontSize: "1.4rem",
-  padding: "0.2rem 0.4rem",
-  cursor: "pointer",
-  textDecoration: "none",
-  borderBottom: "1px #8adbff solid",
 });
 
 const Title = styled.img`

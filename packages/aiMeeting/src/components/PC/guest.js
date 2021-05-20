@@ -50,17 +50,19 @@ const GuestLayout = styled.div({
   gridTemplateColumns: "1fr 1fr 1fr",
   gridAutoRows: "calc(100vw / 16 * 9 - 10rem)",
   gridGap: "2rem",
+  maxWidth: "100%"
 });
 
 const GuestFrame = styled.div({
   display: "flex",
   flexFlow: "column",
   maxHeight: "100%",
+  maxWidth: '100%',
 });
 
 const GuestPic = styled.img({
-  height: "70%",
-  maxWidth: "100%",
+  maxHeight: "70%",
+  width: "100%",
 });
 
 const GuestName = styled.div({

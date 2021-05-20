@@ -85,7 +85,7 @@ const Text = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   transition: 0.5s;
-  font-size: 0.8rem;
+  font-size: 1.5rem;
   position: absolute;
   transform: ${(props) => (props.show === 1 ? "none" : "translate(0, 100%)")};
   bottom: 0;

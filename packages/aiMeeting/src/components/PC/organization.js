@@ -136,8 +136,7 @@ const DisplayText = styled.div`
 `;
 
 const DisplayPic = styled.img`
-  height: inherit;
-  max-width: 100%;
+  width: 100%;
 `;
 
 const DisplayFrame = styled.div`
