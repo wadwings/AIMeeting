@@ -7,6 +7,7 @@ import logo from "../../assets/img/logo.png";
 import titleImg from "../../assets/img/标题.png";
 import themeImg from "../../assets/img/主题.png";
 import positionImg from "../../assets/img/时间地点.png";
+import RootPic from '../../assets/img/Root.png'
 
 const Root = ({ state, actions }) => {
   const [active, setActive] = useState();
@@ -134,31 +135,32 @@ const Root = ({ state, actions }) => {
 
   return (
     <div id="PC">
+      <RootBackground></RootBackground>
       <Global
         styles={css`
           @media screen and (min-width: 500px) {
             html {
-              font-size: 12px;
+              font-size: 12px!important;
             }
           }
           @media screen and (min-width: 800px) {
             html {
-              font-size: 16px;
+              font-size: 13px!important;
             }
           }
           @media screen and (min-width: 1200px) {
             html {
-              font-size: 20px;
+              font-size: 14px!important;
             }
           }
           @media screen and (min-width: 1600px) {
             html {
-              font-size: 24px;
+              font-size: 15px!important;
             }
           }
           @media screen and (min-width: 2000px) {
             html {
-              font-size: 28px;
+              font-size: 16px!important;
             }
           }
           html {
@@ -270,6 +272,14 @@ const Logo = styled.img`
   top: 0;
   width: 7rem;
 `;
+
+const RootBackground = styled.div({
+  position: 'absolute',
+  height: '100%',
+  width: '100%',
+  backgroundImage: 'url(static/images/Root.png)',
+  zIndex: -2,
+})
 
 const Menu = styled.div({
   position: 'fixed',

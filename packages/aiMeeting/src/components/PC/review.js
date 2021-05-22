@@ -5,7 +5,7 @@ import groupPic from "../../assets/img/2019人工智能大会合影.png";
 import * as common from "./common";
 
 const Review = ({ state, actions }) => {
-  const { Main, Title, MainBg2, Content, ContentLayout } = common.components;
+  const { Title, MainBg2, Content, ContentLayout } = common.components;
   const { fetch } = common;
   const [imgs, setImgs] = useState([]);
   useEffect(async () => {
@@ -29,7 +29,7 @@ const Review = ({ state, actions }) => {
     );
   }, []);
   return (
-    <Main>
+    <ReviewLayout>
       <div
         id="item6"
         css={css`
@@ -39,24 +39,39 @@ const Review = ({ state, actions }) => {
       ></div>
       <MainBg2 />
       <Title word="往届回顾" png={reviewPic}></Title>
-
-      <ContentLayout>
-        <Header>首届中国光谷人工智能大会暨企业家高峰论坛（2019）</Header>
+      <Header>首届中国光谷人工智能大会暨企业家高峰论坛（2019）</Header>
         <Img src={groupPic}></Img>
         <P>2019人工智能大会全体人员合影</P>
+      <ContentLayout>
         <Content>
           {" "}
           <Grid>{imgs}</Grid>
         </Content>
       </ContentLayout>
-    </Main>
+    </ReviewLayout>
   );
 };
 
 const ReviewLayout = styled.div({
-  margin: "2rem",
-  maxHeight: "calc(100% - 8rem)",
-  overflowY: "auto",
+  position: "relative",
+  display: "flex",
+  flexFlow: "column",
+  width: "100%",
+  margin: '0 auto',
+  height: "calc(100vw / 16 * 9 + 20rem)",
+  overflow: "hidden",
+  '@media screen and (min-width: 1000px)': {
+    height: 'calc(562.5px + 20rem)',
+    width: '1000px',
+  },
+  '@media screen and (min-width: 2000px)': {
+    height: 'calc(843.75px + 20rem)',
+    width: '1500px'
+  },
+  '@media screen and (min-width: 3000px)': {
+    height: 'calc(1125px + 20rem)',
+    width: '2000px'
+  }
 });
 
 const MagicImg = (props) => {
@@ -81,6 +96,7 @@ const Text = styled.div`
   transition: 0.5s;
   position: absolute;
   transform: ${(props) => (props.show === 1 ? "none" : "translate(0, 100%)")};
+  font-size: 1rem;
   bottom: 0;
   opacity: ${(props) => props.show};
   color: white;
@@ -116,7 +132,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 2rem;
-  grid-gap: 2rem;
+  grid-gap: 1vw;
 `;
 
 export default connect(Review);
