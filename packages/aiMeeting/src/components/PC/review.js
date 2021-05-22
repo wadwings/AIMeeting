@@ -2,15 +2,15 @@ import { connect, Global, css, styled } from "frontity";
 import React, { useState, useEffect } from "react";
 import reviewPic from "../../assets/img/往届回顾.png";
 import groupPic from "../../assets/img/2019人工智能大会合影.png";
-import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
 const Review = ({ state, actions }) => {
-  const { Main, Title, MainBg2, ContentLayout } = common.components;
+  const { Main, Title, MainBg2, Content, ContentLayout } = common.components;
   const { fetch } = common;
   const [imgs, setImgs] = useState([]);
   useEffect(async () => {
     await fetch("/usage/review");
+    await fetch("/usage/review/page/2/");
     setImgs(
       state.source
         .get("/usage/review")
@@ -18,6 +18,14 @@ const Review = ({ state, actions }) => {
         .map(({ text, picture }) => (
           <MagicImg key={text} src={picture.guid} word={text}></MagicImg>
         ))
+        .concat(
+          state.source
+            .get("/usage/review/page/2")
+            .items.map(({ type, id }) => state.source[type][id])
+            .map(({ text, picture }) => (
+              <MagicImg key={text} src={picture.guid} word={text}></MagicImg>
+            ))
+        )
     );
   }, []);
   return (
@@ -36,8 +44,10 @@ const Review = ({ state, actions }) => {
         <Header>首届中国光谷人工智能大会暨企业家高峰论坛（2019）</Header>
         <Img src={groupPic}></Img>
         <P>2019人工智能大会全体人员合影</P>
+        <Content>
           {" "}
           <Grid>{imgs}</Grid>
+        </Content>
       </ContentLayout>
     </Main>
   );
