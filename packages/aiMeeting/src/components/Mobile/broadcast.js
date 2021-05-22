@@ -40,7 +40,6 @@ const Broadcast = ({ state }) => {
   const options = optionText.map((_, i) =>
     i === active ? (
       <ActiveOption key={_} onClick={setActive.bind(this, i)}>
-        <ActiveImg></ActiveImg>
         {_}
       </ActiveOption>
     ) : (

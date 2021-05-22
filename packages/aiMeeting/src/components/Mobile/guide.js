@@ -35,7 +35,6 @@ const Guide = () => {
   const options = data.map((_, i) =>
     i === active ? (
       <ActiveOption onClick={() => setActive(i)} key={_.title}>
-        <ActiveImg></ActiveImg>
         {_.title}
       </ActiveOption>
     ) : (
