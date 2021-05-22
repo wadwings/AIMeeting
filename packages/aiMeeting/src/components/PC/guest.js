@@ -48,7 +48,6 @@ const GuestLayout = styled.div({
   position: "relative",
   display: "grid",
   gridTemplateColumns: "1fr 1fr 1fr",
-  gridAutoRows: "60%",
   gridGap: "2rem",
   maxWidth: "100%"
 });
@@ -61,7 +60,6 @@ const GuestFrame = styled.div({
 });
 
 const GuestPic = styled.img({
-  maxHeight: "70%",
   width: "100%",
 });
 

@@ -4,7 +4,7 @@ import rontinePic from "../../assets/img/日程安排.png";
 import * as common from "./common";
 
 const Rontine = () => {
-  const { Main, Title, MainBg2, Post, Content, ContentLayout, Menu, Option, ActiveOption } = common.components;
+  const { Main, Title, MainBg2, Post, Content, ContentLayout, Menu, Option, ActiveOption, ActiveImg } = common.components;
   const [active, setActive] = useState(0);
   const data = [
     {
@@ -23,6 +23,7 @@ const Rontine = () => {
   const options = data.map((_, i) =>
     i === active ? (
       <ActiveOption onClick={() => setActive(i)} key={_.title}>
+        <ActiveImg></ActiveImg>
         {_.title}
       </ActiveOption>
     ) : (

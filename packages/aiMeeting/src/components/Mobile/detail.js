@@ -107,13 +107,11 @@ const Detail = ({ state, actions }) => {
       <Center>
         <Select onChange={updateActive}>{options}</Select>
       </Center>
-      {DetailContent ? (
-        <ContentLayout>
-          <Content>{DetailContent}</Content>
-        </ContentLayout>
-      ) : (
-        <Grid>{displays}</Grid>
-      )}
+      <ContentLayout>
+        <Content>
+          {DetailContent ? { DetailContent } : <Grid>{displays}</Grid>}
+        </Content>
+      </ContentLayout>
     </Main>
   );
 };
@@ -212,10 +210,10 @@ const Select = styled.select`
 `;
 
 const Grid = styled.div({
-  display: 'grid',
-  gridGap: '2rem',
-  gridTemplateColumns: '1fr 1fr',
-  margin: '3rem'
-})
+  display: "grid",
+  gridGap: "2rem",
+  gridTemplateColumns: "1fr 1fr",
+  margin: "3rem",
+});
 
 export default connect(Detail);

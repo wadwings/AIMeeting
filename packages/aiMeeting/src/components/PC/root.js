@@ -68,7 +68,7 @@ const Root = ({ state, actions }) => {
           click: () => setGuide(0)
         },
         {
-          name: "会议记录",
+          name: "会议注册",
           url: "item4",
           click: () => setGuide(1)
         },

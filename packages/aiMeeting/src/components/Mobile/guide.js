@@ -5,7 +5,18 @@ import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
 const Guide = () => {
-  const { Main, Title, MainBg2, Post, Content, ContentLayout, Menu, Option, ActiveOption } = common.components;
+  const {
+    Main,
+    Title,
+    MainBg2,
+    Post,
+    Content,
+    ContentLayout,
+    Menu,
+    Option,
+    ActiveOption,
+    ActiveImg,
+  } = common.components;
   const [active, setActive] = useState(0);
   const data = [
     {
@@ -23,13 +34,18 @@ const Guide = () => {
   ];
   const options = data.map((_, i) =>
     i === active ? (
-      <ActiveOption onClick={() => setActive(i)} key={_.title}>{_.title}</ActiveOption>
+      <ActiveOption onClick={() => setActive(i)} key={_.title}>
+        <ActiveImg></ActiveImg>
+        {_.title}
+      </ActiveOption>
     ) : (
-      <Option onClick={() => setActive(i)} key={_.title}>{_.title}</Option>
+      <Option onClick={() => setActive(i)} key={_.title}>
+        {_.title}
+      </Option>
     )
   );
   return (
-    <Main id='item4'>
+    <Main id="item4">
       <MainBg2 />
       <Title word="大会指引" png={guidePic}></Title>
       <Menu>{options}</Menu>

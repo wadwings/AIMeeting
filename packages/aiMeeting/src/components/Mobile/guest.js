@@ -52,7 +52,6 @@ const GuestLayout = styled.div({
   position: "relative",
   display: "grid",
   gridTemplateColumns: "1fr 1fr",
-  gridTemplateRows: "50%",
   gridGap: "2rem",
 });
 

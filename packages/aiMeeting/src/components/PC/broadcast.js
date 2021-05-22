@@ -1,12 +1,13 @@
 import { connect, useConnect, css, styled } from "frontity";
 import React, { useState, useEffect } from "react";
 import yunPic from "../../assets/img/云端直播.png";
+import activeOptionPic from '../../assets/img/ActiveOption.png'
 import * as common from "./common";
 
-const Broadcast = ({preIndex, setIndex}) => {
-  const {state} = useConnect();
-  const {fetch} = common;
-  const { Main, Title, MainBg2 } = common.components;
+const Broadcast = ({ preIndex, setIndex }) => {
+  const { state } = useConnect();
+  const { fetch } = common;
+  const { Main, Title, MainBg2, ContentLayout } = common.components;
   const [photo, setPhoto] = useState([]);
   const optionText = ["视频直播", "照片直播"];
   async function updatePhotos() {
@@ -16,19 +17,20 @@ const Broadcast = ({preIndex, setIndex}) => {
         .get("/usage/broadcast")
         .items.map(({ type, id }) => state.source[type][id])
         .map(({ picture, text }) => {
-          return{
+          return {
             url: picture.guid,
-            text: text
-          }
+            text: text,
+          };
         })
     );
   }
   useEffect(() => {
-    updatePhotos()
-  },[])
+    updatePhotos();
+  }, []);
   const options = optionText.map((_, i) =>
     i === preIndex ? (
       <ActiveOption key={_} onClick={setIndex.bind(this, i)}>
+        <ActiveImg></ActiveImg>
         {_}
       </ActiveOption>
     ) : (
@@ -39,25 +41,29 @@ const Broadcast = ({preIndex, setIndex}) => {
   );
   return (
     <Main>
-      <div id='item5' css={css`position:absolute;top:-5rem;`}></div>
+      <div
+        id="item5"
+        css={css`
+          position: absolute;
+          top: -5rem;
+        `}
+      ></div>
       <MainBg2 />
       <Title word="云端直播" png={yunPic}></Title>
       <Menu>{options}</Menu>
-      <BroadcastLayout>
-        {preIndex === 0 ? <VideoBroadcast /> : <Photobroadcast src={photo} />}
-      </BroadcastLayout>
+      <ContentLayout>
+          {preIndex === 0 ? <VideoBroadcast /> : <Photobroadcast src={photo} />}
+      </ContentLayout>
     </Main>
   );
 };
 
-const Photobroadcast = ({src}) => {
-  const photos = src.map(({url, text}) => <MagicImg key={text} src={url} word={text}></MagicImg>)
-  return (
-    <>
-      {photos}
-    </>
-  )
-}
+const Photobroadcast = ({ src }) => {
+  const photos = src.map(({ url, text }) => (
+    <MagicImg key={text} src={url} word={text}></MagicImg>
+  ));
+  return <>{photos}</>;
+};
 
 const MagicImg = (props) => {
   const [status, setStatus] = useState(0);
@@ -87,19 +93,20 @@ const Text = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 `;
 
 const MagicDiv = styled.div`
   position: relative;
   overflow: hidden;
-  height: 66%;
-  max-width: 100%;
-  margin: 0 auto;
+  height: 80%;
+  margin: 2rem auto;
+  width: -webkit-fit-content;
 `;
 
 const Img = styled.img`
-max-height: 100%;
-max-width: 100%;
+  max-height: 100%;
+  max-width: 100%;
 `;
 
 const VideoBroadcast = () => {
@@ -167,13 +174,6 @@ const VideoTitle = styled.div({
   marginRight: "2rem",
 });
 
-const BroadcastLayout = styled.div({
-  position: "relative",
-  flex: 1,
-  margin: "2rem",
-  overflowY: "auto",
-});
-
 const Menu = styled.div({
   position: "relative",
   margin: "0 auto",
@@ -185,20 +185,32 @@ const Menu = styled.div({
 });
 
 const Option = styled.div({
-  color: 'grey',
+  color: "grey",
   textAlign: "center",
   width: "8rem",
   fontSize: "1.2rem",
   cursor: "pointer",
 });
-
+const ActiveImg = () => {
+  return (
+    <img
+      css={css({
+        position: "absolute",
+        zIndex: -1,
+        top: 0,
+        width: "11rem",
+        transform: "translate(-3rem, -0.6rem)",
+      })}
+      src={activeOptionPic}
+    ></img>
+  );
+};
 const ActiveOption = styled.div({
   textAlign: "center",
   width: "8rem",
   color: "#042252",
   fontSize: "1.6rem",
   cursor: "pointer",
-  borderBottom: "2px #042252 solid",
 });
 
 export default connect(Broadcast);

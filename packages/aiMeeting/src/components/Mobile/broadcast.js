@@ -13,6 +13,7 @@ const Broadcast = ({ state }) => {
     ActiveOption,
     Content,
     ContentLayout,
+    ActiveImg,
   } = common.components;
   const { fetch } = common;
   const [active, setActive] = useState(0);
@@ -39,6 +40,7 @@ const Broadcast = ({ state }) => {
   const options = optionText.map((_, i) =>
     i === active ? (
       <ActiveOption key={_} onClick={setActive.bind(this, i)}>
+        <ActiveImg></ActiveImg>
         {_}
       </ActiveOption>
     ) : (

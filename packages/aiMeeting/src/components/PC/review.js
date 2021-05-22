@@ -6,7 +6,7 @@ import defaultPic from "../../assets/img/默认.png";
 import * as common from "./common";
 
 const Review = ({ state, actions }) => {
-  const { Main, Title, MainBg2 } = common.components;
+  const { Main, Title, MainBg2, ContentLayout } = common.components;
   const { fetch } = common;
   const [imgs, setImgs] = useState([]);
   useEffect(async () => {
@@ -15,22 +15,30 @@ const Review = ({ state, actions }) => {
       state.source
         .get("/usage/review")
         .items.map(({ type, id }) => state.source[type][id])
-        .map(({text, picture}) => <MagicImg key={text} src={picture.guid} word={text}></MagicImg>)
+        .map(({ text, picture }) => (
+          <MagicImg key={text} src={picture.guid} word={text}></MagicImg>
+        ))
     );
   }, []);
   return (
     <Main>
-      <div id='item6' css={css`position:absolute;top:-5rem;`}></div>
+      <div
+        id="item6"
+        css={css`
+          position: absolute;
+          top: -5rem;
+        `}
+      ></div>
       <MainBg2 />
       <Title word="往届回顾" png={reviewPic}></Title>
-      <ReviewLayout>
+
+      <ContentLayout>
         <Header>首届中国光谷人工智能大会暨企业家高峰论坛（2019）</Header>
         <Img src={groupPic}></Img>
         <P>2019人工智能大会全体人员合影</P>
-        <Grid>
-          {imgs}
-        </Grid>
-      </ReviewLayout>
+          {" "}
+          <Grid>{imgs}</Grid>
+      </ContentLayout>
     </Main>
   );
 };
@@ -42,17 +50,21 @@ const ReviewLayout = styled.div({
 });
 
 const MagicImg = (props) => {
-  const [status, setStatus] = useState(0)
+  const [status, setStatus] = useState(0);
   const { src, word } = props;
   return (
-    <MagicDiv onMouseEnter={() => setStatus(1)} onMouseLeave={() => setStatus(0)}>
+    <MagicDiv
+      onMouseEnter={() => setStatus(1)}
+      onMouseLeave={() => setStatus(0)}
+    >
       <Img src={src}></Img>
       <Text show={status}>{word}</Text>
     </MagicDiv>
   );
-}
+};
 
 const Text = styled.div`
+  text-align: center;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);

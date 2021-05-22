@@ -1,6 +1,7 @@
 import { connect, Global, css, styled } from "frontity";
 import React from "react";
 import rontinePic from "../../assets/img/日程安排.png";
+import activeOptionPic from '../../assets/img/ActiveOption.png'
 import * as common from "./common";
 
 const Rontine = ({preIndex, setIndex}) => {
@@ -22,6 +23,7 @@ const Rontine = ({preIndex, setIndex}) => {
   const options = data.map((_, i) =>
     i === preIndex ? (
       <ActiveOption onClick={() => setIndex(i)} key={_.title}>
+        <ActiveImg />
         {_.title}
       </ActiveOption>
     ) : (
@@ -35,7 +37,7 @@ const Rontine = ({preIndex, setIndex}) => {
       <div id='item2' css={css`position:absolute;top:-5rem;`}></div>
       <MainBg2 />
       <Title word="日程安排" png={rontinePic}></Title>
-      <Menu>{options}</Menu>
+      <MenuLayout>{options}</MenuLayout>
       <ContentLayout>
         <Content>
           <Post url={data[preIndex].url}></Post>
@@ -45,7 +47,7 @@ const Rontine = ({preIndex, setIndex}) => {
   );
 };
 
-const Menu = styled.div({
+const MenuLayout = styled.div({
   position: "relative",
   margin: "0 auto",
   width: "80%",
@@ -63,13 +65,25 @@ const Option = styled.div({
   cursor: "pointer",
 });
 
+const ActiveImg = () => {
+  return(
+    <img css={css({
+      position:'absolute',
+      zIndex: -1,
+      top: 0,
+      width: '10rem',
+      transform: 'translate(-2.8rem, -0.5rem)'
+    })} src={activeOptionPic}></img>
+  )
+}
+
 const ActiveOption = styled.div({
+  position:'relative',
   textAlign: "center",
   width: "8rem",
   color: "#042252",
   fontSize: "1.6rem",
-  cursor: "pointer",
-  borderBottom: "2px #042252 solid",
+  cursor: "pointer"
 });
 
 export default Rontine;

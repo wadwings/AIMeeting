@@ -8754,13 +8754,26 @@ const PostFrame = styled.div({
   backgroundColor: "white",
   height: "100%",
   width: "100%",
-  overflowY: "auto",
 });
 
 const ContentLayout = styled.div({
   margin: "2rem 4rem",
   flex: 1,
   overflowY: "auto",
+	'::-webkit-scrollbar': {
+		width : '10px',
+		height: '1px'
+	},
+	'::-webkit-scrollbar-thumb': {
+		borderRadius: '10px',
+		boxShadow: 'inset 0 0 5px rgba(0, 0, 0, 0.2)',
+		background: '#535353'
+	},
+	'::-webkit-scrollbar-track': {
+		boxShadow: 'inset 0 0 5px rgba(0, 0, 0, 0.2)',
+		borderRadius: '10px',
+		background   : '#ededed',
+	}
 });
 
 const Content = styled.div({
@@ -8795,4 +8808,4 @@ const pages = {
   Broadcast,
 };
 
-export { components, pages, fetch };
+export { components, pages, fetch, Post };

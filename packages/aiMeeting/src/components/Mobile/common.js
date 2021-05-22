@@ -11,7 +11,8 @@ import Sponsor from './sponsor'
 import Broadcast from './broadcast'
 import backgroundType1 from '../../assets/img/backgroundType1.png'
 import backgroundType2 from '../../assets/img/backgroundType2.png'
-import {fetch} from '../PC/common'
+import activeOptionPic from '../../assets/img/ActiveOption.png'
+import {fetch, Post} from '../PC/common'
 
 const Title = (props) => {
   const {word, png} = props
@@ -34,19 +35,20 @@ const TitleImg = styled.img`
 `
 
 const TitleFrame = styled.div({
-  height: '2rem',
-  padding: '0.5rem',
-  position: 'relative',
-  fontSize: '1.5rem',
-  color: 'black',
+  height: "2rem",
+  padding: "0.5rem",
+  position: "relative",
+  fontSize: "1.5rem",
+  color: "white",
   fontWeight: 500,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  margin: '0.5rem auto',
-  border: '2px solid #041c45',
-  borderRadius: '3rem',
-})
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  margin: "0.5rem auto",
+  border: "2px solid #041c45",
+  borderRadius: "3rem",
+  background: '#041c45'
+});
 
 const UnderLine = styled.div`
   width: 80%;
@@ -81,25 +83,6 @@ const MainBg2 = () => {
   return <BgImg src={backgroundType2} />
 }
 
-
-const PostUnconnect = (props) => {
-  const {url, state} = props
-  const data = state.source.get(url)
-  const post = state.source[data.type][data.id]
-  return (
-    <PostFrame>
-      <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
-    </PostFrame>
-  )
-}
-
-const PostFrame = styled.div({
-  backgroundColor: 'white',
-  height: '100%',
-  width:'100%',
-  overflowY: 'auto'
-})
-
 const ContentLayout = styled.div({
   margin: "2rem 1rem",
   flex: 1,
@@ -132,16 +115,28 @@ const Option = styled.div({
   cursor: "pointer",
 });
 
+const ActiveImg = () => {
+  return (
+    <img
+      css={css({
+        position: "absolute",
+        zIndex: -1,
+        top: 0,
+        width: "11rem",
+        transform: "translate(-3rem, -0.6rem)",
+      })}
+      src={activeOptionPic}
+    ></img>
+  );
+};
+
 const ActiveOption = styled.div({
   textAlign: "center",
-  width: "7rem",
+  width: "8rem",
   color: "#042252",
-  fontSize: "1.4rem",
+  fontSize: "1.6rem",
   cursor: "pointer",
-  borderBottom: "2px #042252 solid",
 });
-
-const Post = connect(PostUnconnect)
 
 const components = {
   Title,
@@ -154,7 +149,8 @@ const components = {
   Content,
   Menu,
   Option,
-  ActiveOption
+  ActiveOption,
+  ActiveImg
 }
 
 const pages = {
