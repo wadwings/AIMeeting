@@ -109,7 +109,7 @@ const Detail = ({ state, actions }) => {
       </Center>
       <ContentLayout>
         <Content>
-          {DetailContent ? { DetailContent } : <Grid>{displays}</Grid>}
+          {DetailContent ? DetailContent : <Grid>{displays}</Grid>}
         </Content>
       </ContentLayout>
     </Main>
