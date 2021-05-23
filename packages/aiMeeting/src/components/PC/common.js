@@ -11,6 +11,7 @@ import Sponsor from "./sponsor";
 import Broadcast from "./broadcast";
 import backgroundType1 from "../../assets/img/backgroundType1.png";
 import backgroundType2 from "../../assets/img/backgroundType2.png";
+import titleBGPic from '../../assets/img/Title背景.png';
 
 let cache = new Map();
 //{url: {
@@ -53,6 +54,7 @@ const Title = (props) => {
   const { word, png } = props;
   return (
     <TitleFrame>
+			<TitleBG src={titleBGPic}></TitleBG>
       <TitleImg src={png}></TitleImg>
       <TitleText>{word}</TitleText>
     </TitleFrame>
@@ -80,10 +82,15 @@ const TitleFrame = styled.div({
   alignItems: "center",
   justifyContent: "center",
   margin: "0.5rem auto",
-  border: "2px solid #041c45",
   borderRadius: "3rem",
-  background: '#041c45'
 });
+
+const TitleBG = styled.img({
+	position: 'absolute',
+	maxHeight: '4rem',
+	width: '12rem',
+	zIndex: -1
+})
 
 const UnderLine = styled.div`
   width: 80vw;
