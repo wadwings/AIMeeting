@@ -2,7 +2,7 @@ const settings = {
   "name": "aimeeting",
   "state": {
     "frontity": {
-      "url": "https://tx.dedsec.site",
+      "url": "https://ai.dedsec.site",
       "title": "Test Frontity Blog",
       "description": "WordPress installation for Frontity development"
     }
@@ -15,7 +15,7 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://tx.dedsec.site",
+          "url": "https://ai.dedsec.site",
           'postTypes': [
             {
               type: "person",
