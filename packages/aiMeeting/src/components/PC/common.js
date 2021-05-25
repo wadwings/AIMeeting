@@ -76,7 +76,7 @@ const TitleFrame = styled.div({
   padding: "0.5rem",
   position: "relative",
   fontSize: "1.5rem",
-  color: "white",
+  color: "#670a1c",
   fontWeight: 500,
   display: "flex",
   alignItems: "center",
@@ -148,7 +148,6 @@ const PostUnconnect = (props) => {
   );
 };
 const PostBlock = styled.div`
-@charset "UTF-8";
 
 /*
 Theme Name: Twenty Twenty-One
@@ -6036,7 +6035,6 @@ footer {
 	min-width: auto;
 }
 
-@charset "UTF-8";
 #start-resizable-editor-section {
     display:none
 }
@@ -6321,7 +6319,7 @@ footer {
         flex-grow:1
     }
 
-    .wp-block-column[style * =flex-basis] {
+    .wp-block-column[style *=flex-basis] {
         flex-grow:0
     }
 
@@ -6381,7 +6379,7 @@ footer {
     background-size:auto
 }
 
-.wp-block-cover-image.has-background-dim:not([class * =-background-color]), .wp-block-cover.has-background-dim:not([class * =-background-color]) {
+.wp-block-cover-image.has-background-dim:not([class *=-background-color]), .wp-block-cover.has-background-dim:not([class *=-background-color]) {
     background-color:#000
 }
 
@@ -7295,14 +7293,6 @@ ol.has-background, ul.has-background {
     opacity: 1;
     display: flex;
     flex-direction:column
-}
-
-.wp-block-navigation[style * =text-decoration] .wp-block-navigation-link, .wp-block-navigation[style * =text-decoration] .wp-block-navigation-link__content, .wp-block-navigation[style * =text-decoration] .wp-block-navigation-link__content:active, .wp-block-navigation[style * =text-decoration] .wp-block-navigation-link__content:focus, .wp-block-navigation[style * =text-decoration] .wp-block-navigation__container {
-    text-decoration:inherit
-}
-
-.wp-block-navigation:not([style * =text-decoration]) .wp-block-navigation-link__content, .wp-block-navigation:not([style * =text-decoration]) .wp-block-navigation-link__content:active, .wp-block-navigation:not([style * =text-decoration]) .wp-block-navigation-link__content:focus {
-    text-decoration:none
 }
 
 .wp-block-navigation-link__content {
@@ -8758,7 +8748,6 @@ pre.wp-block-verse {
 
 `
 const PostFrame = styled.div({
-  backgroundColor: "white",
   height: "100%",
   width: "100%",
 });
@@ -8787,7 +8776,7 @@ const Content = styled.div({
   minHeight: "calc(100% - 4rem)",
   padding: "2rem",
   position: "relative",
-  backgroundColor: "rgba(255,255,255, 0.6)",
+  backgroundColor: "rgba(255,255,255, 0.8)",
 });
 
 const Post = connect(PostUnconnect);

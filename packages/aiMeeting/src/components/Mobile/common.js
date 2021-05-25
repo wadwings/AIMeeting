@@ -45,9 +45,8 @@ const TitleFrame = styled.div({
   alignItems: "center",
   justifyContent: "center",
   margin: "0.5rem auto",
-  border: "2px solid #041c45",
   borderRadius: "3rem",
-  background: '#041c45'
+  background: 'linear-gradient(to right, #d13f1a, #fff48d)'
 });
 
 const UnderLine = styled.div`
@@ -133,7 +132,7 @@ const ActiveImg = () => {
 const ActiveOption = styled.div({
   textAlign: "center",
   width: "8rem",
-  color: "#042252",
+  color: "#6c1526",
   fontSize: "1.6rem",
   cursor: "pointer",
 });

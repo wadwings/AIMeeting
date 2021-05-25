@@ -1,28 +1,35 @@
 import { connect, useConnect, css, styled } from "frontity";
 import React, { useState, useEffect } from "react";
 import yunPic from "../../assets/img/云端直播.png";
-import activeOptionPic from '../../assets/img/ActiveOption.png'
+import activeOptionPic from "../../assets/img/ActiveOption.png";
 import * as common from "./common";
 
 const Broadcast = ({ preIndex, setIndex }) => {
   const { state } = useConnect();
   const { fetch } = common;
-  const { Main, Title, MainBg2, ContentLayout } = common.components;
+  const { Main, Title, MainBg2, ContentLayout, Post, Content } =
+    common.components;
   const [photo, setPhoto] = useState([]);
   const optionText = ["视频直播", "照片直播"];
   async function updatePhotos() {
-    await fetch("/usage/broadcast");
-    setPhoto(
-      state.source
-        .get("/usage/broadcast")
-        .items.map(({ type, id }) => state.source[type][id])
-        .map(({ picture, text }) => {
-          return {
-            url: picture.guid,
-            text: text,
-          };
-        })
-    );
+    let url = "/usage/broadcast";
+    let photos = [];
+    while (url) {
+      await fetch(url);
+      photos = photos.concat(
+        state.source
+          .get(url)
+          .items.map(({ type, id }) => state.source[type][id])
+          .map(({ picture, text }) => {
+            return {
+              url: picture.guid,
+              text: text,
+            };
+          })
+      );
+      url = state.source.get(url).next;
+    }
+    setPhoto(photos)
   }
   useEffect(() => {
     updatePhotos();
@@ -52,7 +59,13 @@ const Broadcast = ({ preIndex, setIndex }) => {
       <Title word="云端直播" png={yunPic}></Title>
       <Menu>{options}</Menu>
       <ContentLayout>
-          {preIndex === 0 ? <VideoBroadcast /> : <Photobroadcast src={photo} />}
+        {preIndex === 0 ? (
+          <Content>
+            <Post url="/broadcast" />
+          </Content>
+        ) : (
+          <Photobroadcast src={photo} />
+        )}
       </ContentLayout>
     </Main>
   );
@@ -198,17 +211,18 @@ const ActiveImg = () => {
         position: "absolute",
         zIndex: -1,
         top: 0,
-        width: "11rem",
-        transform: "translate(-3rem, -0.6rem)",
+        left: 0,
+        width: "8rem",
       })}
       src={activeOptionPic}
     ></img>
   );
 };
 const ActiveOption = styled.div({
+  position: "relative",
   textAlign: "center",
   width: "8rem",
-  color: "#042252",
+  color: "#670a1c",
   fontSize: "1.6rem",
   cursor: "pointer",
 });

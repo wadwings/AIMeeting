@@ -71,8 +71,8 @@ const ActiveImg = () => {
       position:'absolute',
       zIndex: -1,
       top: 0,
-      width: '10rem',
-      transform: 'translate(-2.8rem, -0.5rem)'
+      left: 0,
+      width: '8rem',
     })} src={activeOptionPic}></img>
   )
 }
@@ -81,7 +81,7 @@ const ActiveOption = styled.div({
   position:'relative',
   textAlign: "center",
   width: "8rem",
-  color: "#042252",
+  color: "#670a1c",
   fontSize: "1.6rem",
   cursor: "pointer"
 });

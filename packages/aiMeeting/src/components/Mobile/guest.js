@@ -42,8 +42,8 @@ const GuestSingle = (props) => {
   return (
     <GuestFrame>
       <GuestPic src={src} />
-      <GuestName>{name}</GuestName>
-      <GuestPosition>{position}</GuestPosition>
+      <h3>{name}</h3>
+      <p>{position}</p>
     </GuestFrame>
   );
 };

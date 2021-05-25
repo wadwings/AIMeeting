@@ -13,26 +13,31 @@ const Broadcast = ({ state }) => {
     ActiveOption,
     Content,
     ContentLayout,
-    ActiveImg,
+    Post,
   } = common.components;
   const { fetch } = common;
   const [active, setActive] = useState(0);
   const [photo, setPhoto] = useState([]);
   const optionText = ["视频直播", "照片直播"];
   async function updatePhotos() {
-    await fetch('/usage')
-    await fetch("/usage/broadcast");
-    setPhoto(
-      state.source
-        .get("/usage/broadcast")
-        .items.map(({ type, id }) => state.source[type][id])
-        .map(({ picture, text }) => {
-          return{
-            url: picture.guid,
-            text: text
-          }
-        })
-    );
+    let url = "/usage/broadcast";
+    let photos = [];
+    while (url) {
+      await fetch(url);
+      photos = photos.concat(
+        state.source
+          .get(url)
+          .items.map(({ type, id }) => state.source[type][id])
+          .map(({ picture, text }) => {
+            return {
+              url: picture.guid,
+              text: text,
+            };
+          })
+      );
+      url = state.source.get(url).next;
+    }
+    setPhoto(photos)
   }
   useEffect(() => {
     updatePhotos()
@@ -55,7 +60,7 @@ const Broadcast = ({ state }) => {
       <Menu>{options}</Menu>
       <ContentLayout>
         <Content>
-          {active === 0 ? <VideoBroadcast /> : <Photobroadcast src={photo} />}
+          {active === 0 ? <Post url='/broadcast'/> : <Photobroadcast src={photo} />}
         </Content>
       </ContentLayout>
     </Main>

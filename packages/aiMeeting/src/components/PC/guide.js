@@ -75,20 +75,21 @@ const ActiveImg = () => {
   return (
     <img
       css={css({
-        position: "absolute",
+        position:'absolute',
         zIndex: -1,
         top: 0,
-        width: "11rem",
-        transform: "translate(-3rem, -0.6rem)",
+        left: 0,
+        width: '8rem',
       })}
       src={activeOptionPic}
     ></img>
   );
 };
 const ActiveOption = styled.div({
+  position: 'relative',
   textAlign: "center",
   width: "8rem",
-  color: "#042252",
+  color: "#670a1c",
   fontSize: "1.6rem",
   cursor: "pointer",
 });

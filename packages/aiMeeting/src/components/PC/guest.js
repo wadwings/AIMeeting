@@ -38,8 +38,8 @@ const GuestSingle = (props) => {
   return (
     <GuestFrame>
       <GuestPic src={src} />
-      <GuestName>{name}</GuestName>
-      <GuestPosition>{position}</GuestPosition>
+      <h3>{name}</h3>
+      <p>{position}</p>
     </GuestFrame>
   );
 };
@@ -64,12 +64,10 @@ const GuestPic = styled.img({
 });
 
 const GuestName = styled.div({
-  paddingLeft: "1rem",
   fontSize: "1.5rem",
 });
 
 const GuestPosition = styled.div({
-  paddingLeft: "1rem",
   fontSize: "1rem",
 });
 

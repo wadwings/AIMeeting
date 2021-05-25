@@ -1,8 +1,7 @@
-import { connect, Global, css, styled } from "frontity";
+import { connect, Global, css, styled, Head } from "frontity";
 import * as common from "./common";
 import React, { useState, useEffect } from "react";
-import bgLayer1 from "../../assets/img/bgLayer1.png";
-import bgLayer2 from "../../assets/img/bgLayer2.png";
+import background from '../../assets/img/background.png'
 import logo from "../../assets/img/logo.png";
 import titleImg from "../../assets/img/标题.png";
 import themeImg from "../../assets/img/主题.png";
@@ -135,6 +134,9 @@ const Root = ({ state, actions }) => {
 
   return (
     <div id="PC">
+      <Head>
+        <title>第二届中国光谷人工智能大会</title>
+      </Head>
       <RootBackground></RootBackground>
       <Global
         styles={css`
@@ -176,8 +178,7 @@ const Root = ({ state, actions }) => {
           }
         `}
       />
-      <BgImg src={bgLayer1}></BgImg>
-      <BgImg src={bgLayer2}></BgImg>
+      <BgImg src={background}></BgImg>
       <Logo src={logo}></Logo>
       <Main>
         <Menu>{options}</Menu>
@@ -269,8 +270,9 @@ const BgImg = styled.img`
 
 const Logo = styled.img`
   position: absolute;
-  top: 0;
-  width: 7rem;
+  left: 1rem;
+  top: 4rem;
+  width: 5rem;
 `;
 
 const RootBackground = styled.div({

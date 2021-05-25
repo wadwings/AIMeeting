@@ -16,19 +16,19 @@ const Detail = ({ state, actions }) => {
       url: "/conference/main",
     },
     {
-      name: "第一分会场",
+      name: "青年学者分论坛",
       url: "/conference/no1",
     },
     {
-      name: "第二分会场",
+      name: "人工智能分论坛",
       url: "/conference/no2",
     },
     {
-      name: "第三分会场",
+      name: "人工智能+分论坛",
       url: "/conference/no3",
     },
     {
-      name: "第四分会场",
+      name: "校友分论坛",
       url: "/conference/no4",
     },
     {
