@@ -31,8 +31,12 @@ const Detail = ({ state, actions }) => {
       url: "/conference/no4",
     },
     {
-      name: "第五分会场",
+      name: "人工智能+汽车",
       url: "/conference/no5",
+    },
+    {
+      name: "人工智能+医疗",
+      url: "/conference/no6",
     },
   ];
   //fetch data
